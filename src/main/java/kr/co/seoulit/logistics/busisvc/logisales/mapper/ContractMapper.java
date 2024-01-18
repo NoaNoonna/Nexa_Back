@@ -3,17 +3,18 @@ package kr.co.seoulit.logistics.busisvc.logisales.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import kr.co.seoulit.logistics.busisvc.logisales.dto.*;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ContractMapper {
 
-	public ArrayList<EstimateEntity> selectEstimateListInContractAvailable(String startDate, String endDate);
+	public ArrayList<EstimateResDto> selectEstimateListInContractAvailable(EstimateReqDto estimateReqDto);
 
-	public ArrayList<ContractEntity> selectContractList(String searchCondition, String startDate, String endDate, String customerCode);
+	public ArrayList<ContractInfoResDto> selectContractList(ContractInfoReqDto contractInfoReqDto);
 	
-	public ArrayList<ContractEntity> selectDeliverableContractList(HashMap<String, String> ableSearchConditionInfo);
+	public ArrayList<ContractInfoResDto> selectDeliverableContractList(HashMap<String, String> ableSearchConditionInfo);
 	
 	public int selectContractCount(String contractDate);
 
@@ -27,13 +28,13 @@ public interface ContractMapper {
 	//ContractDetail
 	public ArrayList<ContractDetailEntity> selectContractDetailList(String contractNo);
 	
-	public ArrayList<ContractEntity> selectDeliverableContractListByCondition(HashMap<String,String> map);
+	public ArrayList<ContractInfoDto> selectDeliverableContractListByCondition(HashMap<String,String> map);
 	
-	public ArrayList<ContractDetailEntity> selectDeliverableContractDetailList(String contractNo);
+	public ArrayList<ContractDetailResDto> selectDeliverableContractDetailList(String contractNo);
 	
 	public int selectContractDetailCount(String contractNo);
 
-	public ArrayList<ContractDetailEntity> selectContractDetailListInMpsAvailable(
+	public ArrayList<ContractDetailInMpsAvailableResDto> selectContractDetailListInMpsAvailable(
 			HashMap<String, String> map);
 
 	public void changeMpsStatusOfContractDetail(HashMap<String, String> map);

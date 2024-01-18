@@ -1,7 +1,9 @@
 package kr.co.seoulit.logistics.busisvc.sales.service;
 
-import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto;
 import kr.co.seoulit.logistics.busisvc.sales.dto.*;
+import kr.co.seoulit.logistics.busisvc.sales.to.DeliveryInfoEntity;
 import kr.co.seoulit.logistics.busisvc.sales.to.SalesPlanEntity;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
 public interface SalesService {
 
     // SalesPlanApplicationServiceImpl
-    public ArrayList<ContractEntity> getDeliverableContractList(HashMap<String, String> ableSearchConditionInfo);
+    public ArrayList<ContractInfoResDto> getDeliverableContractList(HashMap<String, String> ableSearchConditionInfo);
 
     public ArrayList<SalesPlanEntity> getSalesPlanList(String dateSearchCondition, String startDate, String endDate);
 

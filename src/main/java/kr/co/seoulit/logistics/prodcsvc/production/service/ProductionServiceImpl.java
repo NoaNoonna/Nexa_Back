@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.TreeSet;
 
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailInMpsAvailableResDto;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity;
 import kr.co.seoulit.logistics.prodcsvc.production.entity.MpsEntity;
 import kr.co.seoulit.logistics.prodcsvc.production.mpastruct.MpsResMapstructor;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper;
 import kr.co.seoulit.logistics.busisvc.logisales.repository.ContractDetailRepository;
 import kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailInMpsAvailableTO;
+import kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailTO;
 import kr.co.seoulit.logistics.busisvc.sales.mapper.SalesPlanMapper;
 import kr.co.seoulit.logistics.prodcsvc.production.mapper.MpsMapper;
 import kr.co.seoulit.logistics.prodcsvc.production.mapper.MrpMapper;
@@ -73,8 +75,8 @@ public class ProductionServiceImpl implements ProductionService {
 	 * NOTE: MPS등록 검색
 	 */
 	@Override
-	public ArrayList<ContractDetailEntity> getContractDetailListInMpsAvailable(String searchCondition,
-																			   String startDate, String endDate) {
+	public ArrayList<ContractDetailInMpsAvailableResDto> getContractDetailListInMpsAvailable(String searchCondition,
+																							 String startDate, String endDate) {
 
 		HashMap<String, String> map = new HashMap<>();
 		map.put("searchCondition", searchCondition);

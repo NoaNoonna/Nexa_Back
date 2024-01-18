@@ -3,7 +3,7 @@
    
 <mapper namespace="kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper">
 	
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateEntity" id="estimateList">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateResDto" id="estimateList">
 		<result property="effectiveDate" column="EFFECTIVE_DATE"  />
 		<result property="estimateNo" column="ESTIMATE_NO"  />
 		<result property="estimateRequester" column="ESTIMATE_REQUESTER"  />
@@ -15,7 +15,7 @@
 		<collection property="estimateDetailResDtoList" resultMap="kr.co.seoulit.logistics.busisvc.logisales.mapper.EstimateMapper.estimateDetailResult" javaType="java.util.ArrayList"/>
 	</resultMap>
 	
-	<select id="selectEstimateListInContractAvailable" parameterType="kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateEntity" resultMap="estimateList">
+	<select id="selectEstimateListInContractAvailable" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateReqDto" resultMap="estimateList">
 	<![CDATA[
 			SELECT * 
 			FROM ESTIMATE e, ESTIMATE_DETAIL ed 
@@ -28,7 +28,7 @@
 	</select>
 	
 	
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity" id="contractInfoResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto" id="contractInfoResult">
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="estimateNo" column="ESTIMATE_NO"  />
 		<result property="contractType" column="CONTRACT_TYPE"  />
@@ -45,7 +45,7 @@
 	</resultMap>
 
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity" id="contractInfoResult1">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto" id="contractInfoResult1">
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="estimateNo" column="ESTIMATE_NO"  />
 		<result property="contractType" column="CONTRACT_TYPE"  />
@@ -66,9 +66,8 @@
 		 />
 	</resultMap>
 	
-
-<!--		수주조회-->
-		<select id="selectContractList" parameterType="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity" resultMap="contractInfoResult1">
+	
+		<select id="selectContractList" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoReqDto" resultMap="contractInfoResult1">
 		
 				WITH 
 			CODE_DETAIL_LIST AS (
@@ -171,7 +170,7 @@
 			SELECT CONTRACT_SEQ.NEXTVAL FROM DUAL
 		</select>
 				
-		<insert id="insertContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity">
+		<insert id="insertContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractReqDto">
 			INSERT INTO CONTRACT (CONTRACT_NO, ESTIMATE_NO, 
 				CONTRACT_TYPE, CUSTOMER_CODE, CONTRACT_DATE, 
 				CONTRACT_REQUESTER, PERSON_CODE_IN_CHARGE, DESCRIPTION) 
@@ -181,7 +180,7 @@
 						#{personCodeInCharge}, #{description})
 		</insert>
 		
-		<update id="updateContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity">
+		<update id="updateContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractReqDto">
 			UPDATE CONTRACT SET ESTIMATE_NO = #{estimateNo} , 
 				   CONTRACT_TYPE = #{contractType} , 
 				   CUSTOMER_CODE = #{customerCode} ,
@@ -192,7 +191,7 @@
 				   WHERE CONTRACT_NO = #{contractNo}
 		</update>
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity" id="contractDetailResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailResDto" id="contractDetailResult">
 		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"  />
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="itemCode" column="ITEM_CODE"  />
@@ -252,7 +251,7 @@
 		SELECT * FROM CONTRACT_DETAIL WHERE CONTRACT_NO = #{contractNo}
 	</select>
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity" id="contractDetailInMpsAvailableResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailInMpsAvailableResDto" id="contractDetailInMpsAvailableResult">
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="contractType" column="CONTRACT_TYPE"  />
 		<result property="contractDate" column="CONTRACT_DATE"  />
@@ -298,7 +297,7 @@
 		UPDATE CONTRACT_DETAIL SET PROCESSING_STATUS = #{mpsStatus} WHERE CONTRACT_DETAIL_NO = #{contractDetailNo}
 	</update>
 	
-	<delete id="deleteContractDetail" parameterType="kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity">
+	<delete id="deleteContractDetail" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailReqDto">
 		DELETE FROM CONTRACT_DETAIL WHERE CONTRACT_DETAIL_NO = #{contractDetailNo}
 	</delete>
 

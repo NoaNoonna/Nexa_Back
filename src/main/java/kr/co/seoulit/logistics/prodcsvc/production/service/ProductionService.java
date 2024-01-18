@@ -3,7 +3,7 @@ package kr.co.seoulit.logistics.prodcsvc.production.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailInMpsAvailableResDto;
 import kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailInMpsAvailableTO;
 import kr.co.seoulit.logistics.prodcsvc.production.entity.MpsEntity;
 import kr.co.seoulit.logistics.prodcsvc.production.to.*;
@@ -13,7 +13,7 @@ public interface ProductionService {
 	public ArrayList<MpsResTO> getMpsList(MpsReqTO mpsReqTO);
 	public ArrayList<MpsResTO> getMpsMainList(MpsReqTO mpsReqTO);
 	
-	public ArrayList<ContractDetailEntity>
+	public ArrayList<ContractDetailInMpsAvailableResDto>
 		getContractDetailListInMpsAvailable(String searchCondition, String startDate, String endDate);
 
 	public ArrayList<SalesPlanInMpsAvailableTO> 

@@ -1,11 +1,19 @@
 package kr.co.seoulit.logistics.busisvc.logisales.controller;
 
 import com.nexacro.java.xapi.data.PlatformData;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateDetailReqDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateDetailResDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateReqDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateResDto;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateDetailEntity;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateEntity;
+import kr.co.seoulit.logistics.busisvc.logisales.mapstruct.EstimateDetailResMapstruct;
+import kr.co.seoulit.logistics.busisvc.logisales.mapstruct.EstimateReqMapstruct;
+import kr.co.seoulit.logistics.busisvc.logisales.mapstruct.EstimateResMapstruct;
 import kr.co.seoulit.logistics.busisvc.logisales.service.LogisalesService;
 import kr.co.seoulit.logistics.sys.util.DatasetBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Description;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,27 +31,34 @@ public class EstimateController {
     private DatasetBeanMapper datasetBeanMapper;
     @Autowired
     private LogisalesService logisalesService;
+    @Autowired
+    private EstimateDetailResMapstruct estimateDetailResMapstruct;
+    @Autowired
+    private EstimateResMapstruct estimateResMapstruct;
+    @Autowired
+    private EstimateReqMapstruct estimateReqMapstruct;
 
     @Description(value = "견적조회/수정 : 견적조회")
     @RequestMapping(value = "/estimate/list")
     public void searchEstimateInfo(@RequestAttribute("reqData") PlatformData reqData,
                                    @RequestAttribute("resData") PlatformData resData) throws Exception {
 //        MaBatis
-        String startDate = reqData.getVariable("startDate").getString();
-        String endDate = reqData.getVariable("endDate").getString();
-        String dateSearchCondition = reqData.getVariable("dateSearchCondition").getString();
+        EstimateReqDto estimateReqDto = new EstimateReqDto();
+        estimateReqDto.setDateSearchCondition(reqData.getVariable("dateSearchCondition").getString());
+        estimateReqDto.setStartDate(reqData.getVariable("startDate").getString());
+        estimateReqDto.setEndDate(reqData.getVariable("endDate").getString());
 
-        ArrayList<EstimateEntity> estimateResDtoList = logisalesService.getEstimateList(startDate, endDate, dateSearchCondition);
-        ArrayList<EstimateDetailEntity> estimateDetailResDtoList = new ArrayList<>();
+        ArrayList<EstimateResDto> estimateResDtoList = logisalesService.getEstimateList(estimateReqDto);
+        ArrayList<EstimateDetailResDto> estimateDetailResDtoList = new ArrayList<>();
 
-        for (EstimateEntity estimateResDto : estimateResDtoList) { // estimate 개수만큼 돌려서
-            for (EstimateDetailEntity estimateDetailResDto : estimateResDto.getEstimateDetailEntityList()) {
+        for (EstimateResDto estimateResDto : estimateResDtoList) { // estimate 개수만큼 돌려서
+            for (EstimateDetailResDto estimateDetailResDto : estimateResDto.getEstimateDetailResDtoList()) {
                 estimateDetailResDtoList.add(estimateDetailResDto); // 빈 디테일리스트에 estimateResDto의 EstimateDetailList를 넣어줌
             }
         }
 
-        datasetBeanMapper.beansToDataset(resData, estimateResDtoList, EstimateEntity.class);
-        datasetBeanMapper.beansToDataset(resData, estimateDetailResDtoList, EstimateDetailEntity.class);
+        datasetBeanMapper.beansToDataset(resData, estimateResDtoList, EstimateResDto.class);
+        datasetBeanMapper.beansToDataset(resData, estimateDetailResDtoList, EstimateDetailResDto.class);
 
 //        JPA
 //        EstimateReqDto estimateReqDto = new EstimateReqDto();
@@ -70,17 +85,17 @@ public class EstimateController {
     public void addNewEstimate(@RequestAttribute("reqData") PlatformData reqData,
                                @RequestAttribute("resData") PlatformData resData ) throws Exception {
 
-        EstimateEntity newEstimateReqDto = datasetBeanMapper.datasetToBean(reqData, EstimateEntity.class);
-        List<EstimateDetailEntity> newEstimateDetailReqDto = datasetBeanMapper.datasetToBeans(reqData, EstimateDetailEntity.class);
+        EstimateReqDto newEstimateReqDto = datasetBeanMapper.datasetToBean(reqData, EstimateReqDto.class);
+        List<EstimateDetailReqDto> newEstimateDetailReqDto = datasetBeanMapper.datasetToBeans(reqData, EstimateDetailReqDto.class);
 
-        newEstimateReqDto.setEstimateDetailEntityList(newEstimateDetailReqDto);
+        newEstimateReqDto.setEstimateDetailReqDtoList(newEstimateDetailReqDto);
         HashMap<String, Object> resultList = logisalesService.addNewEstimate(newEstimateReqDto);
 
-        EstimateEntity estimateResDto = new EstimateEntity();
+        EstimateResDto estimateResDto = new EstimateResDto();
         estimateResDto.setEstimateNo(resultList.get("newEstimateNo").toString());
 
         resData.getVariableList().add("EstimateDtNo", resultList.get("newEstimateDetailNo").toString());
-        datasetBeanMapper.beanToDataset(resData, estimateResDto, EstimateEntity.class);
+        datasetBeanMapper.beanToDataset(resData, estimateResDto, EstimateResDto.class);
 
         /*
         EstimateEntity newEstimateEntity = datasetBeanMapper.datasetToBean(reqData, EstimateEntity.class);
@@ -103,8 +118,8 @@ public class EstimateController {
     @RequestMapping(value = "/estimatedetail/batch")
     public void batchListProcess(@RequestAttribute("reqData") PlatformData reqData) throws Exception {
 
-        ArrayList<EstimateDetailEntity> estimateDetailReqDtos =
-                (ArrayList<EstimateDetailEntity>) datasetBeanMapper.datasetToBeans(reqData, EstimateDetailEntity.class);
+        ArrayList<EstimateDetailReqDto> estimateDetailReqDtos =
+                (ArrayList<EstimateDetailReqDto>) datasetBeanMapper.datasetToBeans(reqData, EstimateDetailReqDto.class);
 
         logisalesService.batchEstimateDetailListProcess(estimateDetailReqDtos);
     }

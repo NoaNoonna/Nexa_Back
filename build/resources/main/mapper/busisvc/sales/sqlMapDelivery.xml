@@ -17,7 +17,6 @@
         <result property="unitPrice" column="UNIT_PRICE"/>
         <result property="sumPrice" column="SUM_PRICE"/>
         <result property="deliveryDate" column="DELIVERY_DATE"/>
-
         <result property="deliveryPlaceName" column="DELIVERY_PLACE_NAME"/>
     </resultMap>
 

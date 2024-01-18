@@ -7,7 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailInMpsAvailableResDto;
 import kr.co.seoulit.logistics.prodcsvc.production.entity.MpsEntity;
 import kr.co.seoulit.logistics.prodcsvc.production.to.MpsReqTO;
 import kr.co.seoulit.logistics.prodcsvc.production.to.MpsResTO;
@@ -77,10 +77,10 @@ public class MpsController {
 		String startDate = reqData.getVariable("startDate").getString();
 		String endDate = reqData.getVariable("endDate").getString();
 
-		ArrayList<ContractDetailEntity> contractDetailInMpsAvailableList = productionService
+		ArrayList<ContractDetailInMpsAvailableResDto> contractDetailInMpsAvailableList = productionService
 				.getContractDetailListInMpsAvailable(searchCondition, startDate, endDate);
 
-		datasetBeanMapper.beansToDataset(resData, contractDetailInMpsAvailableList, ContractDetailEntity.class);
+		datasetBeanMapper.beansToDataset(resData, contractDetailInMpsAvailableList, ContractDetailInMpsAvailableResDto.class);
 	}
 
 

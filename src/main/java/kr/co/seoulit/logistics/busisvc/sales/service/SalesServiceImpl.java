@@ -1,10 +1,12 @@
 package kr.co.seoulit.logistics.busisvc.sales.service;
 
-import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto;
 import kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper;
 import kr.co.seoulit.logistics.busisvc.sales.dto.*;
 import kr.co.seoulit.logistics.busisvc.sales.mapper.DeliveryMapper;
 import kr.co.seoulit.logistics.busisvc.sales.mapper.SalesPlanMapper;
+import kr.co.seoulit.logistics.busisvc.sales.to.DeliveryInfoEntity;
 import kr.co.seoulit.logistics.busisvc.sales.to.SalesPlanEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,12 +29,12 @@ public class SalesServiceImpl implements SalesService {
 
 
     @Override
-    public ArrayList<ContractEntity> getDeliverableContractList(HashMap<String, String> map) {
+    public ArrayList<ContractInfoResDto> getDeliverableContractList(HashMap<String, String> map) {
 
-        ArrayList<ContractEntity> contractInfoResDtoList = contractMapper.selectDeliverableContractList(map);
-        for (ContractEntity bean : contractInfoResDtoList) { // 해당 수주의 수주상세 리스트 세팅
+        ArrayList<ContractInfoResDto> contractInfoResDtoList = contractMapper.selectDeliverableContractList(map);
+        for (ContractInfoResDto bean : contractInfoResDtoList) { // 해당 수주의 수주상세 리스트 세팅
 
-            bean.setContractDetailEntityList(contractMapper.selectDeliverableContractDetailList(bean.getContractNo()));
+            bean.setContractDetailResDtoList(contractMapper.selectDeliverableContractDetailList(bean.getContractNo()));
 
         }
 

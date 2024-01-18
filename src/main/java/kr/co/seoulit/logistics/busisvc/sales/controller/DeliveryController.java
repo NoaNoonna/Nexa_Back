@@ -1,10 +1,11 @@
 package kr.co.seoulit.logistics.busisvc.sales.controller;
 
 import com.nexacro.java.xapi.data.PlatformData;
-import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractDetailEntity;
-import kr.co.seoulit.logistics.busisvc.logisales.entity.ContractEntity;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailResDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto;
 import kr.co.seoulit.logistics.busisvc.sales.dto.*;
 import kr.co.seoulit.logistics.busisvc.sales.service.SalesService;
+import kr.co.seoulit.logistics.busisvc.sales.to.DeliveryInfoEntity;
 import kr.co.seoulit.logistics.sys.util.DatasetBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
@@ -38,17 +39,17 @@ public class DeliveryController {
         map.put("endDate", reqData.getVariable("endDate").getString());
         map.put("customerCode", reqData.getVariable("customerCode").getString());
 
-        ArrayList<ContractEntity> deliveryInfoResDtoList = salesService.getDeliverableContractList(map);
+        ArrayList<ContractInfoResDto> deliveryInfoResDtoList = salesService.getDeliverableContractList(map);
 
-        ArrayList<ContractDetailEntity> deliverableContractDetailList = new ArrayList<>();
-        for (ContractEntity contract : deliveryInfoResDtoList) {
-            for (ContractDetailEntity contractDetailResDto : contract.getContractDetailEntityList()) {
+        ArrayList<ContractDetailResDto> deliverableContractDetailList = new ArrayList<>();
+        for (ContractInfoResDto contract : deliveryInfoResDtoList) {
+            for (ContractDetailResDto contractDetailResDto : contract.getContractDetailResDtoList()) {
                 deliverableContractDetailList.add(contractDetailResDto);
             }
         }
 
-        datasetBeanMapper.beansToDataset(resData, deliveryInfoResDtoList, ContractEntity.class);
-        datasetBeanMapper.beansToDataset(resData, deliverableContractDetailList, ContractDetailEntity.class);
+        datasetBeanMapper.beansToDataset(resData, deliveryInfoResDtoList, ContractInfoResDto.class);
+        datasetBeanMapper.beansToDataset(resData, deliverableContractDetailList, ContractDetailResDto.class);
     }
 
     @Description(value = "납품")
