@@ -1,1 +1,1 @@
-# Nexa_Back 물류 메인
+# Nexa_Back 재고통합관리
