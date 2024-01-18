@@ -3,6 +3,8 @@ package kr.co.seoulit.logistics.purcstosvc.stock.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import kr.co.seoulit.logistics.logiinfosvc.compinfo.to.BaseTO;
 import kr.co.seoulit.logistics.sys.annotation.Dataset;
 import lombok.Data;
@@ -14,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @Dataset(name="gds_stock")
 @EqualsAndHashCode(callSuper = false)
 public class StockEntity extends BaseTO {
-	
+
 	private String warehouseCode;
 	@Id
 	private String itemCode;
@@ -27,4 +29,6 @@ public class StockEntity extends BaseTO {
 	private String deliveryAmount;
 	private String totalStockAmount;
 
+	@Transient
+	private String checked;
 }

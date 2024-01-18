@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-23T19:34:30+0900",
-    comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 17.0.8.1 (Amazon.com Inc.)"
+    date = "2024-01-18T21:35:30+0900",
+    comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 11.0.21 (Amazon.com Inc.)"
 )
 @Component
 public class ItemGroupReqMapStructImpl implements ItemGroupReqMapStruct {
@@ -40,6 +40,7 @@ public class ItemGroupReqMapStructImpl implements ItemGroupReqMapStruct {
         itemGroupEntity.setItemGroupCode( dto.getItemGroupCode() );
         itemGroupEntity.setDescription( dto.getDescription() );
         itemGroupEntity.setItemGroupName( dto.getItemGroupName() );
+        itemGroupEntity.setChecked( dto.getChecked() );
         itemGroupEntity.setStatus( dto.getStatus() );
 
         return itemGroupEntity;

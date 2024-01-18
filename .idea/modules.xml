@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Logistics71_SpringBoot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" />
+    </modules>
+  </component>
+</project>

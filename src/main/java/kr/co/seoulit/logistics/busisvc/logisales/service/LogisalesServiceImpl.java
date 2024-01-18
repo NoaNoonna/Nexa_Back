@@ -44,21 +44,21 @@ public class LogisalesServiceImpl implements LogisalesService {
 	public ArrayList<EstimateResDto> getEstimateList(EstimateReqDto estimateReqDto) {
 
 //		MyBatis
-//		return estimateMapper.selectEstimateList(estimateReqDto);
+		return estimateMapper.selectEstimateList(estimateReqDto);
 
 //		JPA
-		ArrayList<EstimateEntity> estimateEntities = new ArrayList<>();
-		if (estimateReqDto.getDateSearchCondition().equals("estimateDate")) {
-			estimateEntities = estimateRepository.findByEstimateDateBetween(estimateReqDto.getStartDate(), estimateReqDto.getEndDate());
-
-
-		} else if (estimateReqDto.getDateSearchCondition().equals("effectiveDate")) {
-			estimateEntities = estimateRepository.findByEffectiveDateBetween(estimateReqDto.getStartDate(), estimateReqDto.getEndDate());
-		}
-
-		ArrayList<EstimateResDto> estimateResDtos = null;
-		estimateResDtos = estimateResMapstruct.toDto(estimateEntities);
-		return estimateResDtos;
+//		ArrayList<EstimateEntity> estimateEntities = new ArrayList<>();
+//		if (estimateReqDto.getDateSearchCondition().equals("estimateDate")) {
+//			estimateEntities = estimateRepository.findByEstimateDateBetween(estimateReqDto.getStartDate(), estimateReqDto.getEndDate());
+//
+//
+//		} else if (estimateReqDto.getDateSearchCondition().equals("effectiveDate")) {
+//			estimateEntities = estimateRepository.findByEffectiveDateBetween(estimateReqDto.getStartDate(), estimateReqDto.getEndDate());
+//		}
+//
+//		ArrayList<EstimateResDto> estimateResDtos = null;
+//		estimateResDtos = estimateResMapstruct.toDto(estimateEntities);
+//		return estimateResDtos;
 	}
 
 	@Override

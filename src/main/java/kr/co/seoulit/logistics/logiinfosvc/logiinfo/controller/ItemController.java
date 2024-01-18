@@ -141,7 +141,7 @@ public class ItemController {
 	// 품목조회
 	@RequestMapping(value = "/searchItemList")
 	public void searchItemList(@RequestAttribute("reqData") PlatformData reqData,
-			@RequestAttribute("resData") PlatformData resData) throws Exception {
+								@RequestAttribute("resData") PlatformData resData) throws Exception {
 
 		ArrayList<ItemGroupResDto> searchItem = logiInfoService.searchItemList();
 		System.out.println(searchItem);
@@ -155,8 +155,8 @@ public class ItemController {
 	public void searchItemDetailList(@RequestAttribute("reqData") PlatformData reqData,
 			@RequestAttribute("resData") PlatformData resData) throws Exception {
 
-		String eNumber = reqData.getVariable("eNumber").getString();
-		ArrayList<ItemTO> searchParticularsItem = logiInfoService.getitemInfoList(eNumber);
+		String itemGroupCode = reqData.getVariable("itemGroupCode").getString();
+		ArrayList<ItemTO> searchParticularsItem = logiInfoService.getitemInfoList(itemGroupCode);
 
 		datasetBeanMapper.beansToDataset(resData, searchParticularsItem, ItemTO.class);
 	}
