@@ -1,11 +1,9 @@
 package kr.co.seoulit.logistics.busisvc.logisales.service;
 
-import kr.co.seoulit.logistics.busisvc.logisales.dto.*;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateDetailEntity;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateEntity;
 import kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper;
 import kr.co.seoulit.logistics.busisvc.logisales.mapper.EstimateMapper;
-import kr.co.seoulit.logistics.busisvc.logisales.mapstruct.*;
 import kr.co.seoulit.logistics.busisvc.logisales.repository.ContractRepository;
 import kr.co.seoulit.logistics.busisvc.logisales.repository.EstimateDetailRepository;
 import kr.co.seoulit.logistics.busisvc.logisales.repository.EstimateRepository;
@@ -29,42 +27,31 @@ public class LogisalesServiceImpl implements LogisalesService {
 	private final EstimateRepository estimateRepository;
 	private final EstimateDetailRepository estimateDetailRepository;
 	private final ContractRepository contractRepository;
-	private final EstimateReqMapstruct estimateEntityList;
-	private final EstimateReqMapstruct estimateReqMapstruct;
-	private final EstimateResMapstruct estimateResMapstruct;
-	private final EstimateDetailReqMapstruct estimateDetailReqMapstruct;
-	private final EstimateDetailResMapstruct estimateDetailResMapstruct;
-	private final ContractInfoReqMapstruct contractInfoReqMapstruct;
-	private final ContractInfoResMapstruct contractInfoResMapstruct;
-	private final ContractReqMapstruct contractReqMapstruct;
-	private final ContractResMapstruct contractResMapstruct;
 
 
 	@Override // dateSearchCondition
-	public ArrayList<EstimateResDto> getEstimateList(EstimateReqDto estimateReqDto) {
+	public ArrayList<EstimateEntity> getEstimateList(String startDate,String endDate,String dateSearchCondition) {
 
 //		MyBatis
 //		return estimateMapper.selectEstimateList(estimateReqDto);
 
 //		JPA
 		ArrayList<EstimateEntity> estimateEntities = new ArrayList<>();
-		if (estimateReqDto.getDateSearchCondition().equals("estimateDate")) {
-			estimateEntities = estimateRepository.findByEstimateDateBetween(estimateReqDto.getStartDate(), estimateReqDto.getEndDate());
+		if ("estimateDate".equals(dateSearchCondition)) {
+			estimateEntities = estimateRepository.findByEstimateDateBetween(startDate, endDate);
 
 
-		} else if (estimateReqDto.getDateSearchCondition().equals("effectiveDate")) {
-			estimateEntities = estimateRepository.findByEffectiveDateBetween(estimateReqDto.getStartDate(), estimateReqDto.getEndDate());
+		} else if ("effectiveDate".equals(dateSearchCondition)) {
+			estimateEntities = estimateRepository.findByEffectiveDateBetween(startDate, endDate);
 		}
 
-		ArrayList<EstimateResDto> estimateResDtos = null;
-		estimateResDtos = estimateResMapstruct.toDto(estimateEntities);
-		return estimateResDtos;
+		return estimateEntities;
 	}
 
 	@Override
-	public ArrayList<EstimateDetailResDto> getEstimateDetailList(EstimateReqDto estimateReqDto) {
+	public ArrayList<EstimateDetailEntity> getEstimateDetailList(EstimateEntity estimateReqDto) {
 
-		ArrayList<EstimateDetailResDto> estimateDetailResDtoList = null;
+		ArrayList<EstimateDetailEntity> estimateDetailResDtoList = null;
 
 		estimateDetailResDtoList = estimateMapper.selectEstimateDetailList(estimateReqDto.getEstimateNo());
 		return estimateDetailResDtoList;
@@ -72,7 +59,7 @@ public class LogisalesServiceImpl implements LogisalesService {
 
 	//견적등록
 	@Override
-	public HashMap<String, Object> addNewEstimate(EstimateReqDto estimateReqDto) {
+	public HashMap<String, Object> addNewEstimate(EstimateEntity estimateReqDto) {
 
 		ModelMap resultMap = new ModelMap();
 
@@ -83,14 +70,14 @@ public class LogisalesServiceImpl implements LogisalesService {
 		// 뷰에서 보내온 EstimateDto에 새로운 견적일련번호 set,  뷰에서 전달받을때는 NULL인 상태
 
 		estimateReqDto.setEstimateNo(newEstimateNo);
-		EstimateEntity estimateEntity = estimateReqMapstruct.toEntity(estimateReqDto);
+
 		// 견적상세 Bean 을 Insert
 		ArrayList<EstimateDetailEntity> estimateDetailEntityList = new ArrayList<>();
 		
 		StringBuffer newEstimateDetailNoInsert = new StringBuffer();
 
 		// 견적상세 List - 견적상세 bean 
-		for (EstimateDetailReqDto estimateDetailReqDto : estimateReqDto.getEstimateDetailReqDtoList()) {
+		for (EstimateDetailEntity estimateDetailReqDto : estimateReqDto.getEstimateDetailEntityList()) {
 			
 			// 견적상세일번호 생성
 			StringBuffer newEstimateDetailNo = new StringBuffer();
@@ -103,13 +90,12 @@ public class LogisalesServiceImpl implements LogisalesService {
 			estimateDetailReqDto.setEstimateNo(newEstimateNo);
 
 			// 새로 생성된 견적상세일련번호를 저장
-			newEstimateDetailNoInsert.append(newEstimateDetailNo.toString()+",");
-			EstimateDetailEntity estimateDetailEntity = estimateDetailReqMapstruct.toEntity(estimateDetailReqDto);
-			estimateDetailEntityList.add(estimateDetailEntity);
+//			newEstimateDetailNoInsert.append(newEstimateDetailNo.toString()+",");
+			estimateDetailEntityList.add(estimateDetailReqDto);
 		}
-		estimateEntity.setEstimateDetailEntityList(estimateDetailEntityList);
+		estimateReqDto.setEstimateDetailEntityList(estimateDetailEntityList);
 		// jpa 사용
-		estimateRepository.save(estimateEntity);
+		estimateRepository.save(estimateReqDto);
 
 		resultMap.put("newEstimateDetailNo", newEstimateDetailNoInsert);
 
@@ -167,36 +153,33 @@ public class LogisalesServiceImpl implements LogisalesService {
 	}
 
 	@Override
-	public void batchEstimateDetailListProcess(ArrayList<EstimateDetailReqDto> estimateDetailReqDtos) {
+	public void batchEstimateDetailListProcess(ArrayList<EstimateDetailEntity> estimateDetailEntities) {
 		
-		for (EstimateDetailReqDto estimateDetailReqDto : estimateDetailReqDtos) {
-			EstimateDetailEntity estimateDetail = estimateDetailReqMapstruct.toEntity(estimateDetailReqDto);
-			
-			String status = estimateDetail.getStatus();
+		for (EstimateDetailEntity estimateDetailEntity : estimateDetailEntities) {
+
+			String status = estimateDetailEntity.getStatus();
 			switch (status) {
 
 			case "update":
-				estimateDetailRepository.save(estimateDetail); // Entity로 변환하여 Repo에 저장
+				estimateDetailRepository.save(estimateDetailEntity); // Entity로 변환하여 Repo에 저장
 				break;
 
 				//기존의 값을 수정했을 경우
 			case "delete":
 				//jpa 적용
-				estimateDetailRepository.delete(estimateDetail);
+				estimateDetailRepository.delete(estimateDetailEntity);
 				break;
 			}
 		}
 	}
 
-	
 	@Override
-	public ArrayList<ContractInfoResDto> getContractList(
-			ContractInfoReqDto contractInfoReqDto) {
-		ArrayList<ContractInfoResDto> contractInfoResDtoList = null;
-		contractInfoResDtoList = contractMapper.selectContractList(contractInfoReqDto);
+	public ArrayList<ContractEntity> getContractList(String searchCondition, String startDate, String endDate, String customerCode) {
+		ArrayList<ContractEntity> contractInfoResDtoList = null;
+		contractInfoResDtoList = contractMapper.selectContractList(searchCondition, startDate, endDate, customerCode);
 		return contractInfoResDtoList;
 
-//		ArrayList<ContractInfoDto> contractInfoDtoList = null;
+		//		ArrayList<ContractInfoDto> contractInfoDtoList = null;
 //		if (contractInfoReqDto.getSearchCondition().equals("searchByPeriod")) {
 //			contractInfoDtoList = contractInfoRepository.findByContractDateBetween(contractInfoReqDto.getStartDate(), contractInfoReqDto.getEndDate());
 //
@@ -219,21 +202,21 @@ public class LogisalesServiceImpl implements LogisalesService {
 	}
 
 	@Override
-	public ArrayList<EstimateResDto> getEstimateListInContractAvailable(EstimateReqDto estimateReqDto) {
+	public ArrayList<EstimateEntity> getEstimateListInContractAvailable(String startDate, String endDate) {
 
 
-		ArrayList<EstimateResDto> estimateListInContractAvailable = null;
-		estimateListInContractAvailable = contractMapper.selectEstimateListInContractAvailable(estimateReqDto);
+		ArrayList<EstimateEntity> estimateListInContractAvailable = null;
+		estimateListInContractAvailable = contractMapper.selectEstimateListInContractAvailable(startDate, endDate);
 
-		for (EstimateResDto bean : estimateListInContractAvailable) {
-			bean.setEstimateDetailResDtoList(estimateMapper.selectEstimateDetailList(bean.getEstimateNo()));//ES2022011360
+		for (EstimateEntity bean : estimateListInContractAvailable) {
+			bean.setEstimateDetailEntityList(estimateMapper.selectEstimateDetailList(bean.getEstimateNo()));//ES2022011360
 		}
 
 		return estimateListInContractAvailable;
 	}
 
 	@Override
-	public HashMap<String, Object> addNewContract(ContractReqDto contractReqDto) {
+	public HashMap<String, Object> addNewContract(ContractEntity contractReqDto) {
 
 		HashMap<String, Object> resultMap = new HashMap<>();
 		
@@ -241,7 +224,26 @@ public class LogisalesServiceImpl implements LogisalesService {
 		String newContractNo = getNewContractNo(contractReqDto.getContractDate()); //CO + contractDate + 01 <= 01은 첫번째라는 뜻 2번째이며 02 로 부여가 됨
 		contractReqDto.setContractNo(newContractNo); // 새로운 수주일련번호 세팅
 
-		ContractEntity contractEntity = contractReqMapstruct.toEntity(contractReqDto);
+		ContractEntity contractEntity =new ContractEntity();
+
+		contractEntity.setContractNo(newContractNo);
+		contractEntity.setContractType(contractReqDto.getContractType());
+		contractEntity.setEstimateNo(contractReqDto.getEstimateNo());
+		contractEntity.setContractDate(contractReqDto.getContractDate());
+		contractEntity.setDescription(contractReqDto.getDescription());
+		contractEntity.setContractRequester(contractReqDto.getContractRequester());
+		contractEntity.setCustomerCode(contractReqDto.getCustomerCode());
+		contractEntity.setPersonCodeInCharge(contractReqDto.getPersonCodeInCharge());
+
+		// 여기서 ContractDetailEntityList 생성 및 설정
+		List<ContractDetailEntity> contractDetailEntityList = new ArrayList<>();
+		for (ContractDetailEntity contractDetailReqDto : contractReqDto.getContractDetailEntityList()) {
+
+			contractDetailEntityList.add(contractDetailReqDto);
+		}
+
+		contractEntity.setContractDetailEntityList(contractDetailEntityList);
+
 		contractRepository.save(contractEntity);
 
 		// 견적 테이블에 수주여부 "Y" 로 수정
@@ -344,11 +346,16 @@ public class LogisalesServiceImpl implements LogisalesService {
 
 	}
 
-	public void cancelEstimate(EstimateReqDto estimateReqDto) {
+	public void cancelEstimate(EstimateEntity estimateReqDto) {
+		EstimateEntity estimateEntity = new EstimateEntity();
+		estimateEntity.setEstimateNo(estimateReqDto.getEstimateNo());
 
-		EstimateEntity estimateEntity = estimateReqMapstruct.toEntity(estimateReqDto);
-		List<EstimateDetailEntity> estimateDetailEntityList
-				= estimateDetailReqMapstruct.toEntity(estimateReqDto.getEstimateDetailReqDtoList());
+		List<EstimateDetailEntity> estimateDetailEntityList = new ArrayList<>();
+		for (EstimateDetailEntity estimateDetailEntity : estimateReqDto.getEstimateDetailEntityList()) {
+
+			estimateDetailEntityList.add(estimateDetailEntity);
+		}
+
 		estimateEntity.setEstimateDetailEntityList(estimateDetailEntityList);
 
 		estimateRepository.deleteByEstimateNo(estimateEntity.getEstimateNo());

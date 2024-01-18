@@ -3,23 +3,19 @@ package kr.co.seoulit.logistics.busisvc.logisales.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateDetailReqDto;
-import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateDetailResDto;
-import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateReqDto;
-import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateResDto;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateEntity;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateDetailEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface EstimateMapper {
-	public ArrayList<EstimateResDto> selectEstimateList(EstimateReqDto estimateReqDto);
+	public ArrayList<EstimateDetailEntity> selectEstimateList(EstimateDetailEntity estimateReqDto);
 	
-	public EstimateResDto selectEstimate(String estimateNo);
+	public EstimateDetailEntity selectEstimate(String estimateNo);
 
 	public int selectEstimateCount(String estimateDate);
 
-	public void insertEstimate(EstimateReqDto estimateReqDto);
+	public void insertEstimate(EstimateDetailEntity estimateReqDto);
 
 	public void updateEstimate(EstimateEntity TO);
 	
@@ -29,11 +25,11 @@ public interface EstimateMapper {
 	
 	//EstimateDetail
 
-	public ArrayList<EstimateDetailResDto> selectEstimateDetailList(String estimateNo);
+	public ArrayList<EstimateDetailEntity> selectEstimateDetailList(String estimateNo);
 
-	public ArrayList<EstimateDetailResDto> selectEstimateDetailCount(String estimateNo);
+	public ArrayList<EstimateDetailEntity> selectEstimateDetailCount(String estimateNo);
 
-	public void insertEstimateDetail(EstimateDetailReqDto estimateDetailReqDto);
+	public void insertEstimateDetail(EstimateDetailEntity estimateDetailReqDto);
 
 	public void updateEstimateDetail(EstimateDetailEntity TO);
 

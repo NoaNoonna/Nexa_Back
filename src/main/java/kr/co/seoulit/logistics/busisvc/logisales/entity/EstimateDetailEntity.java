@@ -37,5 +37,4 @@ public class EstimateDetailEntity extends BaseTO implements Serializable{
 	@Transient
 	private String status;
 
-
 }

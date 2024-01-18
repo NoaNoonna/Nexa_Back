@@ -1,10 +1,7 @@
 package kr.co.seoulit.logistics.busisvc.logisales.controller;
 
 import com.nexacro.java.xapi.data.PlatformData;
-import kr.co.seoulit.logistics.busisvc.logisales.dto.*;
 import kr.co.seoulit.logistics.busisvc.logisales.entity.*;
-import kr.co.seoulit.logistics.busisvc.logisales.mapstruct.EstimateReqMapstruct;
-import kr.co.seoulit.logistics.busisvc.logisales.mapstruct.EstimateResMapstruct;
 import kr.co.seoulit.logistics.busisvc.logisales.service.LogisalesService;
 import kr.co.seoulit.logistics.sys.util.DatasetBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +22,6 @@ public class ContractController {
 	private LogisalesService logisalesService;
 	@Autowired
 	private DatasetBeanMapper datasetBeanMapper;
-	@Autowired
-	private EstimateReqMapstruct estimateReqMapstruct;
-	@Autowired
-	private EstimateResMapstruct estimateResMapstruct;
 
 	public ContractController() {
 	}
@@ -38,24 +31,24 @@ public class ContractController {
 	public void searchContract(@RequestAttribute("reqData") PlatformData reqData,
 							   @RequestAttribute("resData") PlatformData resData) throws Exception {
 
-		ContractInfoReqDto contractInfoReqDto = new ContractInfoReqDto();
-		contractInfoReqDto.setSearchCondition(reqData.getVariableList().getString("searchCondition"));
-		contractInfoReqDto.setStartDate(reqData.getVariableList().getString("firstDate"));
-		contractInfoReqDto.setEndDate(reqData.getVariableList().getString("endDate"));
-		contractInfoReqDto.setCustomerCode(reqData.getVariableList().getString("customerCode"));
+//		ContractEntity contractInfoReqDto = new ContractEntity();
+		String searchCondition = reqData.getVariableList().getString("searchCondition");
+		String startDate = reqData.getVariableList().getString("startDate");
+		String endDate = reqData.getVariableList().getString("endDate");
+		String customerCode = reqData.getVariableList().getString("customerCode");
 
-		ArrayList<ContractInfoResDto> contractInfoResDtoList = logisalesService.getContractList(contractInfoReqDto);
+		ArrayList<ContractEntity> contractInfoResDtoList = logisalesService.getContractList(searchCondition,startDate,endDate,customerCode);
 
-		List<ContractDetailResDto> contractDetailResDtoList = new ArrayList<>();
+		List<ContractDetailEntity> contractDetailResDtoList = new ArrayList<>();
 
-		for (ContractInfoResDto contractInfoResDto : contractInfoResDtoList) {
-			for (ContractDetailResDto contractDetailResDto : contractInfoResDto.getContractDetailResDtoList()) {
+		for (ContractEntity contractInfoResDto : contractInfoResDtoList) {
+			for (ContractDetailEntity contractDetailResDto : contractInfoResDto.getContractDetailEntityList()) {
 				contractDetailResDtoList.add(contractDetailResDto);
 			}
 		}
 
-		datasetBeanMapper.beansToDataset(resData, contractInfoResDtoList, ContractInfoResDto.class);
-		datasetBeanMapper.beansToDataset(resData, contractDetailResDtoList, ContractDetailResDto.class);
+		datasetBeanMapper.beansToDataset(resData, contractInfoResDtoList, ContractEntity.class);
+		datasetBeanMapper.beansToDataset(resData, contractDetailResDtoList, ContractDetailEntity.class);
 
 	}
 
@@ -64,22 +57,21 @@ public class ContractController {
 	public void searchEstimateInContractAvailable(@RequestAttribute("reqData") PlatformData reqData,
 												  @RequestAttribute("resData") PlatformData resData) throws Exception {
 
-		EstimateReqDto estimateReqDto = new EstimateReqDto();
-		estimateReqDto.setStartDate(reqData.getVariable("startDate").getString());
-		estimateReqDto.setEndDate(reqData.getVariable("endDate").getString());
+		String startDate = reqData.getVariable("startDate").getString();
+		String endDate = reqData.getVariable("endDate").getString();
 
-		ArrayList<EstimateResDto> estimateListInContractAvailable = logisalesService.getEstimateListInContractAvailable(estimateReqDto);
+		ArrayList<EstimateEntity> estimateListInContractAvailable = logisalesService.getEstimateListInContractAvailable(startDate,endDate);
 
-		List<EstimateDetailResDto> estimateDetailList = new ArrayList<>();
+		List<EstimateDetailEntity> estimateDetailList = new ArrayList<>();
 
-		for (EstimateResDto estimateResDto : estimateListInContractAvailable) {
-			for (EstimateDetailResDto estimateDetailResDto : estimateResDto.getEstimateDetailResDtoList()) {
+		for (EstimateEntity estimateResDto : estimateListInContractAvailable) {
+			for (EstimateDetailEntity estimateDetailResDto : estimateResDto.getEstimateDetailEntityList()) {
 				estimateDetailList.add(estimateDetailResDto);
 			}
 		}
 
-		datasetBeanMapper.beansToDataset(resData, estimateListInContractAvailable, EstimateResDto.class);
-		datasetBeanMapper.beansToDataset(resData, estimateDetailList, EstimateDetailResDto.class);
+		datasetBeanMapper.beansToDataset(resData, estimateListInContractAvailable, EstimateEntity.class);
+		datasetBeanMapper.beansToDataset(resData, estimateDetailList, EstimateDetailEntity.class);
 
 	}
 
@@ -88,12 +80,12 @@ public class ContractController {
 	public void addNewContract(@RequestAttribute("reqData") PlatformData reqData,
 							   @RequestAttribute("resData") PlatformData resData) throws Exception {
 
-		ContractReqDto contractReqDto = datasetBeanMapper.datasetToBean(reqData, ContractReqDto.class);
+		ContractEntity contractReqDto = datasetBeanMapper.datasetToBean(reqData, ContractEntity.class);
 		contractReqDto.setContractDate(reqData.getVariable("contractDate").getString());
 		contractReqDto.setPersonCodeInCharge(reqData.getVariable("personCodeInCharge").getString());
 
-		List<ContractDetailReqDto> contractDetailReqDtoList = datasetBeanMapper.datasetToBeans(reqData, ContractDetailReqDto.class);
-		contractReqDto.setContractDetailReqDtoList(contractDetailReqDtoList);
+		List<ContractDetailEntity> contractDetailReqDtoList = datasetBeanMapper.datasetToBeans(reqData, ContractDetailEntity.class);
+		contractReqDto.setContractDetailEntityList(contractDetailReqDtoList);
 
 		HashMap<String, Object> map = logisalesService.addNewContract(contractReqDto);
 
@@ -106,10 +98,10 @@ public class ContractController {
 	public void deleteEstimate(@RequestAttribute("reqData") PlatformData reqData,
 							   @RequestAttribute("resData") PlatformData resData) throws Exception {
 
-		EstimateReqDto estimateReqDto = new EstimateReqDto();
-		List<EstimateDetailReqDto> estimateDetailReqDtoList = datasetBeanMapper.datasetToBeans(reqData, EstimateDetailReqDto.class);
+		EstimateEntity estimateReqDto = new EstimateEntity();
+		List<EstimateDetailEntity> estimateDetailReqDtoList = datasetBeanMapper.datasetToBeans(reqData, EstimateDetailEntity.class);
 		estimateReqDto.setEstimateNo(reqData.getVariableList().getString("estimateNo"));
-		estimateReqDto.setEstimateDetailReqDtoList(estimateDetailReqDtoList);
+		estimateReqDto.setEstimateDetailEntityList(estimateDetailReqDtoList);
 		logisalesService.cancelEstimate(estimateReqDto);
 	}
 }
