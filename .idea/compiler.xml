@@ -9,7 +9,11 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.24/13a394eed5c4f9efb2a6d956e2086f1d81e857d9/lombok-1.18.24.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.4.2.Final/e55bd90d51cddd638c07d5bd89fc7535d4e3d069/mapstruct-processor-1.4.2.Final.jar" />
         </processorPath>
+<<<<<<< HEAD
         <module name="kr.co.seoulit.Logistics71_SpringBoot.main" />
+=======
+        <module name="Nexa_Back.Logistics71_SpringBoot.main" />
+>>>>>>> df7e1cf3d46502b24e3c48b60499a920925a2f0f
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
