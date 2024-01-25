@@ -3,13 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Logistics71_SpringBoot.main.iml" />
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Nexa_Back.Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Nexa_Back.Logistics71_SpringBoot.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/logi_back(Nexa).Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/logi_back(Nexa).Logistics71_SpringBoot.main.iml" />
->>>>>>> df7e1cf3d46502b24e3c48b60499a920925a2f0f
     </modules>
   </component>
 </project>
