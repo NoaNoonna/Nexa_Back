@@ -16,25 +16,27 @@ import lombok.EqualsAndHashCode;
 @Table(name="CONTRACT_DETAIL")
 @Dataset(name="gds_contractDetail")
 public class ContractDetailTO extends BaseTO {
-	
+
 	@Id
 	private String contractDetailNo;
 	private String contractNo;
 	private String itemCode;
-	private String itemName;	
-	private String unitOfContract; 
-	private String dueDateOfContract;	
+	private String itemName;
+	private String unitOfContract;
+	private String dueDateOfContract;
 	private String estimateAmount;
-	private String stockAmountUse; 
-	private String productionRequirement;     
-	private String unitPriceOfContract;	
+	private String stockAmountUse;
+	private String productionRequirement;
+	private String unitPriceOfContract;
 	private String sumPriceOfContract;
 	private String processingStatus;
-	private String operationCompletedStatus;	
-	private String deliveryCompletionStatus;	
+	private String operationCompletedStatus;
+	private String deliveryCompletionStatus;
+	private String releaseCompletionStatus;
 	private String description;
 	private String mrpGatheringNo;
+
 	@Transient
 	private String checked;
-	
+
 }

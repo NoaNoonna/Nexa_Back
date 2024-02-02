@@ -27,6 +27,7 @@ public class StockEntity extends BaseTO {
 	private String orderAmount;
 	private String inputAmount;
 	private String deliveryAmount;
+	private String releaseAmount;
 	private String totalStockAmount;
 
 	@Transient

@@ -25,6 +25,9 @@ public class ContractInfoReqDto extends BaseTO {
     private String empNameInCharge;
     private String description;
     private String deliveryCompletionStatus;
+    private String releaseCompletionStatus;
+
     @RemoveColumn
     private ArrayList<ContractDetailReqDto> contractDetailReqDtoList;
+
 }

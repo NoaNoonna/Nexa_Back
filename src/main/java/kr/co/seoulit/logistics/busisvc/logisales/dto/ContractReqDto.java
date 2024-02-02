@@ -15,10 +15,11 @@ public class ContractReqDto extends BaseTO {
     private String estimateNo;
     private String contractType;
     private String customerCode;
-    private String contractDate; //
+    private String contractDate;
     private String contractRequester;
-    private String personCodeInCharge; //
+    private String personCodeInCharge;
     private String description;
     private String deliveryCompletionStatus;
+    private String releaseCompletionStatus;
     private List<ContractDetailReqDto> contractDetailReqDtoList;
 }

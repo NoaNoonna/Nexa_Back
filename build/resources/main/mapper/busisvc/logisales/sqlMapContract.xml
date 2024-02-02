@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
+
 <mapper namespace="kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper">
-	
+
 	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateResDto" id="estimateList">
 		<result property="effectiveDate" column="EFFECTIVE_DATE"  />
 		<result property="estimateNo" column="ESTIMATE_NO"  />
@@ -14,20 +14,20 @@
 		<result property="estimateDate" column="ESTIMATE_DATE" />
 		<collection property="estimateDetailResDtoList" resultMap="kr.co.seoulit.logistics.busisvc.logisales.mapper.EstimateMapper.estimateDetailResult" javaType="java.util.ArrayList"/>
 	</resultMap>
-	
+
 	<select id="selectEstimateListInContractAvailable" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateReqDto" resultMap="estimateList">
 	<![CDATA[
-			SELECT * 
-			FROM ESTIMATE e, ESTIMATE_DETAIL ed 
-			WHERE 1=1 
-			AND CONTRACT_STATUS ='N' 
-	        AND TO_DATE(EFFECTIVE_DATE,'YYYY-MM-DD') >= TO_DATE(SYSDATE,'YYYY-MM-DD') 
+			SELECT *
+			FROM ESTIMATE e, ESTIMATE_DETAIL ed
+			WHERE 1=1
+			AND CONTRACT_STATUS ='N'
+	        AND TO_DATE(EFFECTIVE_DATE,'YYYY-MM-DD') >= TO_DATE(SYSDATE,'YYYY-MM-DD')
 	        AND TO_DATE(ESTIMATE_DATE, 'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD')
             AND e.estimate_no = ed.estimate_no(+)
 	]]>
 	</select>
-	
-	
+
+
 	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto" id="contractInfoResult">
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="estimateNo" column="ESTIMATE_NO"  />
@@ -41,7 +41,8 @@
 		<result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE"  />
 		<result property="empNameInCharge" column="EMP_NAME_IN_CHARGE"  />
 		<result property="description" column="DESCRIPTION" />
-		<result property="deliveryCompletionStatus" column="DELIVERY_COMPLETION_STATUS"  />			
+		<result property="deliveryCompletionStatus" column="DELIVERY_COMPLETION_STATUS"  />
+		<result property="releaseCompletionStatus" column="RELEASE_COMPLETION_STATUS"  />
 	</resultMap>
 
 
@@ -58,18 +59,19 @@
 		<result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE"  />
 		<result property="empNameInCharge" column="EMP_NAME_IN_CHARGE"  />
 		<result property="description" column="DESCRIPTION" />
-		<result property="deliveryCompletionStatus" column="DELIVERY_COMPLETION_STATUS"  />			
+		<result property="deliveryCompletionStatus" column="DELIVERY_COMPLETION_STATUS"  />
+		<result property="releaseCompletionStatus" column="RELEASE_COMPLETION_STATUS"  />
 		<collection property="contractDetailResDtoList"
 		column="CONTRACT_NO"
 		select="kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper.selectContractDetailList"
-		javaType="java.util.ArrayList" 
+		javaType="java.util.ArrayList"
 		 />
 	</resultMap>
-	
-	
+
+
 		<select id="selectContractList" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoReqDto" resultMap="contractInfoResult1">
-		
-				WITH 
+
+				WITH
 			CODE_DETAIL_LIST AS (
 			    SELECT
 			        DETAIL_CODE,
@@ -79,23 +81,23 @@
 				)
 			, CONTRACT_LIST AS (
 			    SELECT *
-			    FROM CONTRACT 
+			    FROM CONTRACT
 			    <choose>
 			    	<when test = 'searchCondition != null and searchCondition.equals("SEARCH_BY_PERIOD")'>
-					    WHERE CONTRACT_DATE 
-					    	BETWEEN TO_DATE (#{startDate},'YYYY-MM-DD') 
-					    	AND TO_DATE(#{endDate},'YYYY-MM-DD' ) 
+					    WHERE CONTRACT_DATE
+					    	BETWEEN TO_DATE (#{startDate},'YYYY-MM-DD')
+					    	AND TO_DATE(#{endDate},'YYYY-MM-DD' )
 					</when>
-					<when test = 'searchCondition != null and searchCondition.equals("SEARCH_BY_CUSTOMER")'>			    	
+					<when test = 'searchCondition != null and searchCondition.equals("SEARCH_BY_CUSTOMER")'>
 			   			WHERE CUSTOMER_CODE = #{customerCode}
-			   		</when>  	
+			   		</when>
 			    </choose>
 			    )
 			  , ESTIMATE_LIST AS (
 			    SELECT *
 			    FROM ESTIMATE
 				)
-				
+
 			SELECT
 			      T1.CONTRACT_NO,
 			      T1.ESTIMATE_NO,
@@ -109,7 +111,8 @@
 			      T1.PERSON_CODE_IN_CHARGE,
 			      T4.DETAIL_CODE_NAME    AS EMP_NAME_IN_CHARGE,
 			      T1.DESCRIPTION,
-			      T1.DELIVERY_COMPLETION_STATUS
+			      T1.DELIVERY_COMPLETION_STATUS,
+				  T1.RELEASE_COMPLETION_STATUS
 			  FROM
 			      CONTRACT_LIST     T1,
 			      CODE_DETAIL_LIST  T2,
@@ -121,75 +124,129 @@
 			      AND T1.PERSON_CODE_IN_CHARGE = T4.DETAIL_CODE
 			      AND T1.ESTIMATE_NO = E.ESTIMATE_NO
 	</select>
-	
+
 	<select id="selectDeliverableContractList" parameterType="map" resultMap="contractInfoResult">
 
-				WITH CODE_DETAIL_LIST AS 
+				WITH CODE_DETAIL_LIST AS
 				( SELECT DETAIL_CODE, DETAIL_CODE_NAME FROM CODE_DETAIL ) ,
 				<if test='searchCondition=="searchByCustomer"'>
-				CONTRACT_LIST AS 
+				CONTRACT_LIST AS
 				( SELECT * FROM CONTRACT WHERE CUSTOMER_CODE = #{customerCode} ) ,
 				</if>
 				<if test='searchCondition=="searchByDate"'>
 				CONTRACT_LIST AS ( SELECT * FROM CONTRACT WHERE CONTRACT_DATE BETWEEN
-				TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD') ),				
+				TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD') ),
 				</if>
-				ESTIMATE_LIST AS 
+				ESTIMATE_LIST AS
 				( SELECT * FROM ESTIMATE )
-							  
-				SELECT 
-				T1.CONTRACT_NO,  
-				T1.ESTIMATE_NO,  
-				T1.CONTRACT_TYPE,  
-				T2.DETAIL_CODE_NAME AS CONTRACT_TYPE_NAME, 
-				T1.CUSTOMER_CODE,  
-				T3.DETAIL_CODE_NAME AS CUSTOMER_NAME, 
-				E.ESTIMATE_DATE, 
-				T1.CONTRACT_DATE, 
-				T1.CONTRACT_REQUESTER, 
-				T1.PERSON_CODE_IN_CHARGE, 
-				T4.DETAIL_CODE_NAME AS EMP_NAME_IN_CHARGE, 
+
+				SELECT
+				T1.CONTRACT_NO,
+				T1.ESTIMATE_NO,
+				T1.CONTRACT_TYPE,
+				T2.DETAIL_CODE_NAME AS CONTRACT_TYPE_NAME,
+				T1.CUSTOMER_CODE,
+				T3.DETAIL_CODE_NAME AS CUSTOMER_NAME,
+				E.ESTIMATE_DATE,
+				T1.CONTRACT_DATE,
+				T1.CONTRACT_REQUESTER,
+				T1.PERSON_CODE_IN_CHARGE,
+				T4.DETAIL_CODE_NAME AS EMP_NAME_IN_CHARGE,
 				T1.DESCRIPTION,
-				T1.DELIVERY_COMPLETION_STATUS 
-				FROM 
-				CONTRACT_LIST T1, 
+				T1.DELIVERY_COMPLETION_STATUS,
+				T1.RELEASE_COMPLETION_STATUS
+				FROM
+				CONTRACT_LIST T1,
 				CODE_DETAIL_LIST T2,
-				CODE_DETAIL_LIST T3, 
-				CODE_DETAIL_LIST T4,  
-				ESTIMATE_LIST E 
-				WHERE 
-				T1.CONTRACT_TYPE = T2.DETAIL_CODE 
-				AND T1.CUSTOMER_CODE = T3.DETAIL_CODE 
-				AND T1.PERSON_CODE_IN_CHARGE = T4.DETAIL_CODE  
+				CODE_DETAIL_LIST T3,
+				CODE_DETAIL_LIST T4,
+				ESTIMATE_LIST E
+				WHERE
+				T1.CONTRACT_TYPE = T2.DETAIL_CODE
+				AND T1.CUSTOMER_CODE = T3.DETAIL_CODE
+				AND T1.PERSON_CODE_IN_CHARGE = T4.DETAIL_CODE
 				AND T1.ESTIMATE_NO = E.ESTIMATE_NO
 				AND T1.DELIVERY_COMPLETION_STATUS IS NULL
-				
+				AND T1.RELEASE_COMPLETION_STATUS IS NULL
 		</select>
-	
+
 		<select id="selectContractCount" resultType="int">
 			SELECT CONTRACT_SEQ.NEXTVAL FROM DUAL
 		</select>
-				
+
 		<insert id="insertContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractReqDto">
-			INSERT INTO CONTRACT (CONTRACT_NO, ESTIMATE_NO, 
-				CONTRACT_TYPE, CUSTOMER_CODE, CONTRACT_DATE, 
-				CONTRACT_REQUESTER, PERSON_CODE_IN_CHARGE, DESCRIPTION) 
-				VALUES (#{contractNo}, #{estimateNo}, 
-						#{contractType}, #{customerCode}, 
-						#{contractDate}, #{contractRequester}, 
+			INSERT INTO CONTRACT (CONTRACT_NO, ESTIMATE_NO,
+				CONTRACT_TYPE, CUSTOMER_CODE, CONTRACT_DATE,
+				CONTRACT_REQUESTER, PERSON_CODE_IN_CHARGE, DESCRIPTION)
+				VALUES (#{contractNo}, #{estimateNo},
+						#{contractType}, #{customerCode},
+						#{contractDate}, #{contractRequester},
 						#{personCodeInCharge}, #{description})
 		</insert>
-		
+
 		<update id="updateContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractReqDto">
-			UPDATE CONTRACT SET ESTIMATE_NO = #{estimateNo} , 
-				   CONTRACT_TYPE = #{contractType} , 
-				   CUSTOMER_CODE = #{customerCode} ,
-				   CONTRACT_DATE = #{contractDate} , 
-				   CONTRACT_REQUESTER = #{contractRequester} , 
-				   PERSON_CODE_IN_CHARGE = #{personCodeInCharge} , 
-				   DESCRIPTION = #{description} 
-				   WHERE CONTRACT_NO = #{contractNo}
+			UPDATE CONTRACT
+			SET
+			    ESTIMATE_NO = #{estimateNo} ,
+				CONTRACT_TYPE = #{contractType} ,
+				CUSTOMER_CODE = #{customerCode} ,
+				CONTRACT_DATE = #{contractDate} ,
+				CONTRACT_REQUESTER = #{contractRequester} ,
+				PERSON_CODE_IN_CHARGE = #{personCodeInCharge} ,
+				DESCRIPTION = #{description}
+			WHERE CONTRACT_NO = #{contractNo}
 		</update>
+
+	<!--    출고를 위한 수주조회-->
+	<select id="selectReleaseContractList" parameterType="map" resultMap="contractInfoResult">
+
+				WITH CODE_DETAIL_LIST AS
+				( SELECT DETAIL_CODE, DETAIL_CODE_NAME FROM CODE_DETAIL ) ,
+				<if test='searchCondition=="searchByCustomer"'>
+				CONTRACT_LIST AS
+				( SELECT * FROM CONTRACT WHERE CUSTOMER_CODE = #{customerCode} ) ,
+				</if>
+				<if test='searchCondition=="searchByDate"'>
+				CONTRACT_LIST AS ( SELECT * FROM CONTRACT WHERE CONTRACT_DATE BETWEEN
+				TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD') ),
+				</if>
+				ESTIMATE_LIST AS
+				( SELECT * FROM ESTIMATE )
+
+				SELECT
+				T1.CONTRACT_NO,
+				T1.ESTIMATE_NO,
+				T1.CONTRACT_TYPE,
+				T2.DETAIL_CODE_NAME AS CONTRACT_TYPE_NAME,
+				T1.CUSTOMER_CODE,
+				T3.DETAIL_CODE_NAME AS CUSTOMER_NAME,
+				E.ESTIMATE_DATE,
+				T1.CONTRACT_DATE,
+				T1.CONTRACT_REQUESTER,
+				T1.PERSON_CODE_IN_CHARGE,
+				T4.DETAIL_CODE_NAME AS EMP_NAME_IN_CHARGE,
+				T1.DESCRIPTION,
+				T1.DELIVERY_COMPLETION_STATUS,
+				T1.RELEASE_COMPLETION_STATUS
+				FROM
+				CONTRACT_LIST T1,
+				CODE_DETAIL_LIST T2,
+				CODE_DETAIL_LIST T3,
+				CODE_DETAIL_LIST T4,
+				ESTIMATE_LIST E
+				WHERE
+				T1.CONTRACT_TYPE = T2.DETAIL_CODE
+				AND T1.CUSTOMER_CODE = T3.DETAIL_CODE
+				AND T1.PERSON_CODE_IN_CHARGE = T4.DETAIL_CODE
+				AND T1.ESTIMATE_NO = E.ESTIMATE_NO
+				AND T1.DELIVERY_COMPLETION_STATUS IS NULL
+				AND T1.RELEASE_COMPLETION_STATUS IS NULL
+	</select>
+
+	<!--	출고 수주상세조회-->
+	<select id="selectReleaseContractDetailList" parameterType="String" resultMap="contractDetailResult">
+		SELECT * FROM CONTRACT_DETAIL WHERE CONTRACT_NO = #{contractNo}
+	</select>
 
 	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailResDto" id="contractDetailResult">
 		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"  />
@@ -204,15 +261,16 @@
 		<result property="unitPriceOfContract" column="UNIT_PRICE_OF_CONTRACT"  />
 		<result property="sumPriceOfContract" column="SUM_PRICE_OF_CONTRACT"  />
 		<result property="processingStatus" column="PROCESSING_STATUS" />
-		<result property="operationCompletedStatus" column="OPERATION_COMPLETED_STATUS"  />		
+		<result property="operationCompletedStatus" column="OPERATION_COMPLETED_STATUS"  />
 		<result property="deliveryCompletionStatus" column="DELIVERY_COMPLETION_STATUS"  />
+		<result property="releaseCompletionStatus" column="RELEASE_COMPLETION_STATUS"  />
 		<result property="description" column="DESCRIPTION"  />
 	</resultMap>
-	
+
 <!--	<resultMap id="insertContractDetailResult" type="kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailEntitytity">-->
 <!--		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"/>-->
 <!--	</resultMap>-->
-	
+
 <!--	<parameterMap type="map" id="insertContractDetailParameter">-->
 <!--		<parameter property="estimateNo" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />-->
 <!--		<parameter property="contractNo" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />-->
@@ -242,11 +300,11 @@
 	<select id="selectContractDetailList" parameterType="String" resultMap="contractDetailResult">
 		SELECT * FROM CONTRACT_DETAIL WHERE CONTRACT_NO = #{contractNo}
 	</select>
-	
+
 	<select id="selectDeliverableContractDetailList" parameterType="String" resultMap="contractDetailResult">
 		SELECT * FROM CONTRACT_DETAIL WHERE CONTRACT_NO = #{contractNo}
 	</select>
-	
+
 	<select id="selectContractDetailCount" parameterType="String" resultMap="contractDetailResult">
 		SELECT * FROM CONTRACT_DETAIL WHERE CONTRACT_NO = #{contractNo}
 	</select>
@@ -256,7 +314,7 @@
 		<result property="contractType" column="CONTRACT_TYPE"  />
 		<result property="contractDate" column="CONTRACT_DATE"  />
 		<result property="customerCode" column="CUSTOMER_CODE"  />
-		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"  />			
+		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"  />
 		<result property="itemCode" column="ITEM_CODE"  />
 		<result property="itemName" column="ITEM_NAME"  />
 		<result property="unitOfContract" column="UNIT_OF_CONTRACT"  />
@@ -264,13 +322,13 @@
 		<result property="stockAmountUse" column="STOCK_AMOUNT_USE"  />
 		<result property="productionRequirement" column="PRODUCTION_REQUIREMENT"  />
 		<result property="dueDateOfContract" column="DUE_DATE_OF_CONTRACT"  />
-		<result property="description" column="DESCRIPTION"  />		
+		<result property="description" column="DESCRIPTION"  />
 	</resultMap>
-	
+
 	<select id="selectContractDetailListInMpsAvailable" parameterType="map" resultMap="contractDetailInMpsAvailableResult">
 		SELECT C.CONTRACT_NO,
 			   C.CONTRACT_TYPE,
-			   C.CONTRACT_DATE, 
+			   C.CONTRACT_DATE,
 			   C.CUSTOMER_CODE,
 			   CD.CONTRACT_DETAIL_NO,
 			   CD.ITEM_CODE,
@@ -281,7 +339,7 @@
 			   CD.PRODUCTION_REQUIREMENT,
 			   CD.DUE_DATE_OF_CONTRACT,
 			   CD.DESCRIPTION
-			   FROM contract_detail CD,CONTRACT C 
+			   FROM contract_detail CD,CONTRACT C
 			   WHERE C.CONTRACT_NO = cd.contract_no
 			   AND PROCESSING_STATUS IS NULL
 			   AND operation_completed_status IS NULL
@@ -290,13 +348,13 @@
             </if>
             <if test='searchCondition=="dueDateOfContract"'>
                AND TO_DATE(CD.DUE_DATE_OF_CONTRACT,'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD')
-            </if>		
+            </if>
 	</select>
 
 	<update id="changeMpsStatusOfContractDetail" parameterType="map">
 		UPDATE CONTRACT_DETAIL SET PROCESSING_STATUS = #{mpsStatus} WHERE CONTRACT_DETAIL_NO = #{contractDetailNo}
 	</update>
-	
+
 	<delete id="deleteContractDetail" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractDetailReqDto">
 		DELETE FROM CONTRACT_DETAIL WHERE CONTRACT_DETAIL_NO = #{contractDetailNo}
 	</delete>

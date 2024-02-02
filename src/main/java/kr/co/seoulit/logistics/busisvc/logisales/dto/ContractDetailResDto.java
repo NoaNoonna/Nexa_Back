@@ -24,5 +24,6 @@ public class ContractDetailResDto extends BaseTO {
     private String processingStatus;
     private String operationCompletedStatus;
     private String deliveryCompletionStatus;
+    private String releaseCompletionStatus;
     private String description;
 }

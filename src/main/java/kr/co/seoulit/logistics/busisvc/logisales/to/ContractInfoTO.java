@@ -8,6 +8,8 @@ import kr.co.seoulit.logistics.sys.annotation.RemoveColumn;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Transient;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Dataset(name="gds_contractInfo")
@@ -25,8 +27,14 @@ public class ContractInfoTO extends BaseTO {
 	private String personCodeInCharge;
 	private String empNameInCharge;
 	private String description;
+
+	@Transient
+	private String checked;
+
 	@RemoveColumn
 	private ArrayList<ContractDetailTO> contractDetailTOList;
 	private String deliveryCompletionStatus;
+	private String releaseCompletionStatus;
+
 
 }

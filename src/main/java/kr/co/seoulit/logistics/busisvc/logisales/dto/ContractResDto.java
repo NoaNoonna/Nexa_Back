@@ -20,5 +20,6 @@ public class ContractResDto extends BaseTO {
     private String personCodeInCharge;
     private String description;
     private String deliveryCompletionStatus;
+    private String releaseCompletionStatus;
     private ArrayList<ContractDetailResDto> contractDetailResDtoList;
 }

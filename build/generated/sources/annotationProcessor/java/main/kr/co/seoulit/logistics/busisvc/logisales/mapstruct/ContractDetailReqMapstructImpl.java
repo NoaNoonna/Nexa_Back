@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-18T19:57:50+0900",
-    comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 11.0.21 (Amazon.com Inc.)"
+    date = "2024-02-01T20:17:06+0900",
+    comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 11.0.22 (Amazon.com Inc.)"
 )
 @Component
 public class ContractDetailReqMapstructImpl implements ContractDetailReqMapstruct {
@@ -38,6 +38,7 @@ public class ContractDetailReqMapstructImpl implements ContractDetailReqMapstruc
         contractDetailEntity.setProcessingStatus( dto.getProcessingStatus() );
         contractDetailEntity.setOperationCompletedStatus( dto.getOperationCompletedStatus() );
         contractDetailEntity.setDeliveryCompletionStatus( dto.getDeliveryCompletionStatus() );
+        contractDetailEntity.setReleaseCompletionStatus( dto.getReleaseCompletionStatus() );
         contractDetailEntity.setDescription( dto.getDescription() );
         contractDetailEntity.setChecked( dto.getChecked() );
 

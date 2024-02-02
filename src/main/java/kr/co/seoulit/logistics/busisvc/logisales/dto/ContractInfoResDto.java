@@ -5,6 +5,7 @@ import kr.co.seoulit.logistics.sys.annotation.Dataset;
 import kr.co.seoulit.logistics.sys.annotation.RemoveColumn;
 import lombok.Data;
 
+import javax.persistence.Transient;
 import java.util.ArrayList;
 
 @Data
@@ -23,6 +24,12 @@ public class ContractInfoResDto extends BaseTO {
     private String empNameInCharge;
     private String description;
     private String deliveryCompletionStatus;
+    private String releaseCompletionStatus;
+
+    @Transient
+	private String checked;
+
     @RemoveColumn
     private ArrayList<ContractDetailResDto> contractDetailResDtoList;
+
 }

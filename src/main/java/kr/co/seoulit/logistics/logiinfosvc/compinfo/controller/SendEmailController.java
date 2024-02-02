@@ -1,6 +1,7 @@
 package kr.co.seoulit.logistics.logiinfosvc.compinfo.controller;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,10 +45,10 @@ public class SendEmailController {
    private javax.sql.DataSource data;
    private Multipart multipart;
 
-   @RequestMapping(value="/estimatereportemail")
+   @RequestMapping(value="/estimateReportEmail")
    public void sendEstimateReportEmail(@RequestAttribute("reqData") PlatformData reqData,
                                        @RequestAttribute("resData") PlatformData resData) {
-      String iReportFolderPath = "C:\\Users\\kss12\\OneDrive\\바탕 화면\\logi73\\logi_back\\Logistics71_SpringBoot\\src\\main\\resources\\report\\Estimate.jrxml";
+      String iReportFolderPath = "C:\\Users\\Jihyo Park\\Desktop\\77th 2nd Nexa Logi\\Nexa_Back\\src\\main\\resources\\report\\Estimate.jrxml";
 
       HashMap<String, Object> parameters = new HashMap<>();
       // 레포트 이름
@@ -68,8 +69,7 @@ public class SendEmailController {
          // 그 틀에 맞춰서 파라메터의 정보를 넣어줌
          JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
-         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\kss12\\OneDrive\\바탕 화면\\logi73\\logi_back\\Logistics71_SpringBoot\\src\\main\\resources\\report\\estimateReport.pdf");
-
+         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\Jihyo Park\\Desktop\\77th 2nd Nexa Logi\\Nexa_Back\\src\\main\\resources\\report\\estimateReport.pdf");
 
       } catch (Exception e) {
          e.printStackTrace();
@@ -83,12 +83,12 @@ public class SendEmailController {
             }
          }
       }
-      String fileName = "estimateReport.pdf";
-      String savePath = "C:\\Users\\kss12\\OneDrive\\바탕 화면\\logi73\\logi_back\\Logistics71_SpringBoot\\src\\main\\resources\\report";
+      String fileName="estimateReport.pdf";
+      String savePath="C:\\Users\\Jihyo Park\\Desktop\\77th 2nd Nexa Logi\\Nexa_Back\\src\\main\\resources\\report";
 
-      String host = "smtp.gmail.com";
-      final String user = "lsw9574";
-      final String password = "eogkrqytlyrrmglc";//구글은 앱비밀번호 써야됨(다른거는 모르겠음)
+      String host = "smtp.naver.com";
+      final String username = "noark4rh@naver.com";
+      final String password = "VWLYYMUL82JJ";
 
 
       // Get the session object
@@ -100,14 +100,14 @@ public class SendEmailController {
 
       Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
          protected PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication(user, password);
+            return new PasswordAuthentication(username, password);
          }
       });
 
       // Compose the message
       try {
          MimeMessage message = new MimeMessage(session);
-         message.setFrom(new InternetAddress(user));
+         message.setFrom(new InternetAddress(username));
          message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
          // Subject
@@ -139,10 +139,10 @@ public class SendEmailController {
          e.printStackTrace();
       }
    }
-   @RequestMapping(value="/contractreportemail")
+   @RequestMapping(value="/contractReportEmail")
    public void sendContractReportEmail(@RequestAttribute("reqData") PlatformData reqData,
                                        @RequestAttribute("resData") PlatformData resData) {
-      String iReportFolderPath = "C:\\Users\\kss12\\OneDrive\\바탕 화면\\logi73\\logi_back\\Logistics71_SpringBoot\\src\\main\\resources\\report\\Contract.jrxml";
+      String iReportFolderPath = "C:\\Users\\Jihyo Park\\Desktop\\77th 2nd Nexa Logi\\Nexa_Back\\src\\main\\resources\\report\\Contract.jrxml";
 
       HashMap<String, Object> parameters = new HashMap<>();
       // 레포트 이름
@@ -163,7 +163,7 @@ public class SendEmailController {
          // 그 틀에 맞춰서 파라메터의 정보를 넣어줌
          JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
-         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/LEE/Desktop/Nexacro/logi73/logi_back/Logistics71_SpringBoot/src/main/resources/report/ContractReport.pdf");
+         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/Jihyo Park/Desktop/77th 2nd Nexa Logi/Nexa_Back/src/main/resources/report/ContractReport.pdf");
 
 
       } catch (Exception e) {
@@ -179,11 +179,11 @@ public class SendEmailController {
          }
       }
       String fileName = "ContractReport.pdf";
-      String savePath = "C:\\Users\\LEE\\Desktop\\Nexacro\\logi73\\logi_back\\Logistics71_SpringBoot\\src\\main\\resources\\report";
+      String savePath = "C:\\Users\\Jihyo Park\\Desktop\\77th 2nd Nexa Logi\\Nexa_Back\\src\\main\\resources\\report";
 
-      String host = "smtp.gmail.com";
-      final String user = "lsw9574";
-      final String password = "eogkrqytlyrrmglc";//구글은 앱비밀번호 써야됨(다른거는 모르겠음)
+      String host="smtp.naver.com";
+      final String user="noark4rh@naver.com";
+      final String password="VWLYYMUL82JJ";//구글은 앱비밀번호 써야됨(다른거는 모르겠음)
 
 
       // Get the session object

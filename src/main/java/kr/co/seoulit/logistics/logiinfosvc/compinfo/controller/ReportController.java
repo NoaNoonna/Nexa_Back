@@ -85,7 +85,7 @@ public class ReportController {
 			JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
 			// jrxml 을 내가 원하는 모양을 가지고옴
 			JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-			// 그 틀에 맞춰서 파라메터의 정보를 넣어줌
+			// 그 틀에 맞춰서 파라미터의 정보를 넣어줌
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
 
 			out = response.getOutputStream();
@@ -119,7 +119,7 @@ public class ReportController {
 
 	@RequestMapping(value = "/report/contract")
 	public void contractReport(HttpServletRequest request, HttpServletResponse response) {
-		String iReportFolderPath = "C:\\Users\\LEE\\Desktop\\Nexacro\\logi73\\logi_back\\Logistics71_SpringBoot\\src\\main\\resources\\report\\Contract.jrxml";
+		String iReportFolderPath = "C:\\Users\\Jihyo Park\\Desktop\\77th 2nd Nexa Logi\\Nexa_Back\\src\\main\\resources\\report\\Contract.jrxml";
 
 		HashMap<String, Object> parameters = new HashMap<>();
 		// 레포트 이름

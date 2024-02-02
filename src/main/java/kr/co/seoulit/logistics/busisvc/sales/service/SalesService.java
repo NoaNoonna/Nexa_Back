@@ -1,9 +1,9 @@
 package kr.co.seoulit.logistics.busisvc.sales.service;
 
-import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoDto;
 import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractReqDto;
 import kr.co.seoulit.logistics.busisvc.sales.dto.*;
-import kr.co.seoulit.logistics.busisvc.sales.to.DeliveryInfoEntity;
+import kr.co.seoulit.logistics.busisvc.sales.to.ReleaseInfoTO;
 import kr.co.seoulit.logistics.busisvc.sales.to.SalesPlanEntity;
 
 import java.util.ArrayList;
@@ -30,4 +30,19 @@ public interface SalesService {
     public void insertReturnList(List<ReverseReqDto> reverseReqList);
 
     public ArrayList<QuarterResDto> getSalesQuaChart();
+
+    //출고가능 수주조회
+    public ArrayList<ContractInfoResDto> getReleaseContractList(HashMap<String, String> ableSearchConditionInfo);
+
+    //출고 등록
+    public HashMap<String, Object> releaseRegist(String contractDetailNo);
+
+    //출고현황 조회
+    public ArrayList<ReleaseInfoResDto> getReleaseInfoList();
+
+    //출고현황 수정
+    public HashMap<String, Object> updateReleaseInfo(ArrayList<ReleaseInfoTO> releaseInfoList);
+
+    //출고현황 삭제
+   public void deleteReleaseInfo(String releaseNo);
 }
