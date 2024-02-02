@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Logistics71_SpringBoot.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kr.co.seoulit.Logistics71_SpringBoot.main.iml" />
     </modules>
   </component>
 </project>
