@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-232.9559.62">
-    <data-source name="@localhost [2]" uuid="06e0be1d-b806-4ab4-a056-129ac90e4788">
+  <component name="dataSourceStorageLocal" created-in="IU-223.8836.41">
+    <data-source name="@localhost" uuid="cd2175c8-e9ac-468e-a233-9687c6256b65">
       <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.3" driver-name="Oracle JDBC driver" driver-version="21.5.0.0.0" dbms="ORACLE" exact-version="11.2.0.2.0" exact-driver-version="21.5">
         <extra-name-characters>$#</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>nexalogi765</user-name>
+      <user-name>nexanexa</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="@" />
-            <name qname="PUBLIC" />
-          </node>
+          <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
       <introspection-level>3</introspection-level>
       <load-sources>user_and_system_sources</load-sources>
     </data-source>
-    <data-source name="@localhost [4]" uuid="c436f2d5-5179-4e77-b6b8-959615000d63">
+    <data-source name="@localhost [2]" uuid="0c2f6590-589d-4979-9e67-80a9cc02b65b">
       <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.3" driver-name="Oracle JDBC driver" driver-version="21.5.0.0.0" dbms="ORACLE" exact-version="11.2.0.2.0" exact-driver-version="21.5">
         <extra-name-characters>$#</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>Nlogi77</user-name>
+      <user-name>logilogi</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="@" />
-            <name qname="PUBLIC" />
-          </node>
+          <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
       <introspection-level>3</introspection-level>

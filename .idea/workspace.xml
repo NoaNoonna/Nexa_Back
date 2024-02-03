@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a4b2417-0813-475d-9e9e-b343d0ca5901" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="30e2512c-4f5d-40f1-9fb7-f9265c9a99de" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,27 +15,10 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="spring-beans.schema" />
         <option value="Interface" />
-        <option value="Class" />
       </list>
     </option>
   </component>
@@ -47,11 +28,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2UdmrKfmWNiyORu0v4InHgXd1ml" />
+  <component name="ProjectId" id="2bAe77uwcQfE1qmdJm4PvPJ1pjM" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -64,16 +41,12 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jihyo Park/Desktop/77th 2nd Nexa Logi/본프로젝트파일/NexaLogi/logi_back Merge ver/logi_back/build.gradle&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;SQL Inserts&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/choi/Desktop/reactProject/account_react_back/build.gradle&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;dc0785f536e5356524bcdbef0ace226e&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -81,185 +54,53 @@
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
       &quot;oracle&quot;
+    ],
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
 }</component>
-  <component name="ReactorSettings">
-    <option name="notificationShown" value="true" />
-  </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jihyo Park\Desktop\77th 2nd Nexa Logi\Nexa_Back\src\main\webapp\ImgServer" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\choi\Desktop\nexa project\nexacro_logi\Nexa_Back\src\main\resources\mapper\TransVhcsvc" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="SpringBootApplicationConfigurationType" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.Logistics71SpringBootApplication">
-    <configuration name="Nexa_Back [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="logi_back [build]" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--scan" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="logi_back [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="Logistics71SpringBootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="Logistics71_SpringBoot.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="kr.co.seoulit.logistics.Logistics71SpringBootApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Gradle.logi_back [build]" />
-      <item itemvalue="Gradle.Nexa_Back [dependencies]" />
-      <item itemvalue="Gradle.logi_back [clean]" />
-      <item itemvalue="Spring Boot.Logistics71SpringBootApplication" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.Nexa_Back [dependencies]" />
-        <item itemvalue="Gradle.logi_back [clean]" />
-      </list>
-    </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="9a4b2417-0813-475d-9e9e-b343d0ca5901" name="변경" comment="" />
-      <created>1693278033791</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="30e2512c-4f5d-40f1-9fb7-f9265c9a99de" name="Changes" comment="" />
+      <created>1705662142347</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1693278033791</updated>
-      <workItem from="1693278035441" duration="196000" />
-      <workItem from="1693289032547" duration="17000" />
-      <workItem from="1693289588461" duration="20000" />
-      <workItem from="1693297671105" duration="775000" />
-      <workItem from="1693298472259" duration="292000" />
-      <workItem from="1693302456453" duration="566000" />
-      <workItem from="1693440255300" duration="1215000" />
-      <workItem from="1693465141355" duration="1910000" />
-      <workItem from="1693467071697" duration="2410000" />
-      <workItem from="1693469810361" duration="1140000" />
-      <workItem from="1693476579110" duration="165000" />
-      <workItem from="1693821678327" duration="677000" />
-      <workItem from="1693830542910" duration="600000" />
-      <workItem from="1693872053464" duration="7382000" />
-      <workItem from="1693897075859" duration="2715000" />
-      <workItem from="1693900915617" duration="652000" />
-      <workItem from="1693959659953" duration="3389000" />
-      <workItem from="1693979779356" duration="409000" />
-      <workItem from="1693980574887" duration="6121000" />
-      <workItem from="1694074662127" duration="1432000" />
-      <workItem from="1694082197094" duration="1616000" />
-      <workItem from="1694084819622" duration="343000" />
-      <workItem from="1694085708769" duration="4161000" />
-      <workItem from="1694090349278" duration="597000" />
-      <workItem from="1694132271921" duration="966000" />
-      <workItem from="1694149283526" duration="32000" />
-      <workItem from="1694174548327" duration="2239000" />
-      <workItem from="1694220621194" duration="2179000" />
-      <workItem from="1705574277502" duration="471000" />
-      <workItem from="1705575224936" duration="6420000" />
-      <workItem from="1705632244419" duration="12934000" />
-      <workItem from="1705710150986" duration="7782000" />
-      <workItem from="1705883882611" duration="22034000" />
-      <workItem from="1705969618905" duration="11567000" />
-      <workItem from="1706056201826" duration="6646000" />
-      <workItem from="1706141815416" duration="18916000" />
-      <workItem from="1706228596732" duration="3993000" />
-      <workItem from="1706234246467" duration="250000" />
-      <workItem from="1706234523597" duration="507000" />
-      <workItem from="1706235037733" duration="14699000" />
-      <workItem from="1706318364308" duration="6895000" />
-      <workItem from="1706488561588" duration="28380000" />
-      <workItem from="1706573790181" duration="2629000" />
-      <workItem from="1706578723464" duration="15348000" />
-      <workItem from="1706659385894" duration="9470000" />
-      <workItem from="1706765532259" duration="15128000" />
-      <workItem from="1706836171559" duration="9546000" />
-      <workItem from="1706859286797" duration="6223000" />
+      <updated>1705662142347</updated>
+      <workItem from="1705662143824" duration="5900000" />
+      <workItem from="1705709355497" duration="17512000" />
+      <workItem from="1705882819760" duration="15177000" />
+      <workItem from="1705968128205" duration="21858000" />
+      <workItem from="1706141265685" duration="11021000" />
+      <workItem from="1706229084731" duration="2034000" />
+      <workItem from="1706315205883" duration="608000" />
+      <workItem from="1706486826957" duration="1798000" />
+      <workItem from="1706578394109" duration="1919000" />
+      <workItem from="1706672207253" duration="1222000" />
+      <workItem from="1706746684939" duration="4245000" />
+      <workItem from="1706833767343" duration="3753000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
