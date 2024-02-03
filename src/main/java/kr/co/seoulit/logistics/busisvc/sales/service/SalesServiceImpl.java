@@ -1,13 +1,18 @@
 package kr.co.seoulit.logistics.busisvc.sales.service;
 
-import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoDto;
 import kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoResDto;
+import kr.co.seoulit.logistics.busisvc.logisales.dto.EstimateDetailReqDto;
+import kr.co.seoulit.logistics.busisvc.logisales.entity.EstimateDetailEntity;
 import kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper;
 import kr.co.seoulit.logistics.busisvc.sales.dto.*;
 import kr.co.seoulit.logistics.busisvc.sales.mapper.DeliveryMapper;
+import kr.co.seoulit.logistics.busisvc.sales.mapper.ReleaseMapper;
 import kr.co.seoulit.logistics.busisvc.sales.mapper.SalesPlanMapper;
-import kr.co.seoulit.logistics.busisvc.sales.to.DeliveryInfoEntity;
+import kr.co.seoulit.logistics.busisvc.sales.repository.ReleaseInfoRepository;
+import kr.co.seoulit.logistics.busisvc.sales.to.ReleaseInfoEntity;
+import kr.co.seoulit.logistics.busisvc.sales.to.ReleaseInfoTO;
 import kr.co.seoulit.logistics.busisvc.sales.to.SalesPlanEntity;
+import kr.co.seoulit.logistics.logiinfosvc.compinfo.to.CodeTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 @Service
 public class SalesServiceImpl implements SalesService {
@@ -26,6 +32,10 @@ public class SalesServiceImpl implements SalesService {
     private SalesPlanMapper salesPlanMapper;
     @Autowired
     private DeliveryMapper deliveryMapper;
+    @Autowired
+    private ReleaseMapper releaseMapper;
+    @Autowired
+    private ReleaseInfoRepository releaseInfoRepository;
 
 
     @Override
@@ -236,4 +246,66 @@ public class SalesServiceImpl implements SalesService {
         return deliveryMapper.selectSalesQuaChart();
     }
 
+    //출고가능 수주조회
+    @Override
+    public ArrayList<ContractInfoResDto> getReleaseContractList(HashMap<String, String> map) {
+
+        ArrayList<ContractInfoResDto> contractInfoResDtoList = contractMapper.selectReleaseContractList(map);
+        for (ContractInfoResDto bean : contractInfoResDtoList) { // 해당 수주의 수주상세 리스트 세팅
+
+            bean.setContractDetailResDtoList(contractMapper.selectReleaseContractDetailList(bean.getContractNo()));
+        }
+        return contractInfoResDtoList;
+    }
+
+    //출고 등록
+    @Override
+    public HashMap<String, Object> releaseRegist(String contractDetailNo) {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("contractDetailNo", contractDetailNo);
+
+        releaseMapper.releaseRegist(map);
+
+        HashMap<String, Object> resultMap = new ModelMap();
+        resultMap.put("errorCode", map.get("ERROR_CODE"));
+        resultMap.put("errorMsg", map.get("ERROR_MSG"));
+
+        return resultMap;
+    }
+
+    //출고 현황
+    @Override
+    public ArrayList<ReleaseInfoResDto> getReleaseInfoList() {
+
+        ArrayList<ReleaseInfoResDto> releaseInfoResDtoList = releaseMapper.selectReleaseInfoList();
+
+        return releaseInfoResDtoList;
+    }
+
+    //출고 수정 : 저장
+    @Override
+    public HashMap<String, Object> updateReleaseInfo(ArrayList<ReleaseInfoTO> releaseInfoList) {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        ArrayList<String> updateList = new ArrayList<>();
+
+        for (ReleaseInfoTO bean : releaseInfoList) {
+            String status = bean.getStatus();
+            switch (status) {
+                case "update":
+                    releaseMapper.updateReleaseInfo(bean);
+                    updateList.add(bean.getReleaseNo());
+                    break;
+            }
+        }
+        resultMap.put("UPDATE", updateList);
+        return resultMap;
+    }
+
+    // 출고 삭제
+    @Override
+    public void deleteReleaseInfo(String releaseNo) {
+        releaseMapper.deleteReleaseInfo(releaseNo);
+    }
 }
+

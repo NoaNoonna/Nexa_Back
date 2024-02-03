@@ -31,7 +31,7 @@ public class StockController {
     }
 
 
-    //재고리스트
+    //재고로그조회
     @RequestMapping(value = "/sto/log-list")
     public void searchStockLogList(@RequestAttribute("resData") PlatformData resData,
                                    @RequestAttribute("reqData") PlatformData reqData) throws Exception {

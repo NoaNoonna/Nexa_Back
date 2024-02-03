@@ -38,6 +38,7 @@ public class ContractDetailReqMapstructImpl implements ContractDetailReqMapstruc
         contractDetailEntity.setProcessingStatus( dto.getProcessingStatus() );
         contractDetailEntity.setOperationCompletedStatus( dto.getOperationCompletedStatus() );
         contractDetailEntity.setDeliveryCompletionStatus( dto.getDeliveryCompletionStatus() );
+        contractDetailEntity.setReleaseCompletionStatus( dto.getReleaseCompletionStatus() );
         contractDetailEntity.setDescription( dto.getDescription() );
         contractDetailEntity.setChecked( dto.getChecked() );
 

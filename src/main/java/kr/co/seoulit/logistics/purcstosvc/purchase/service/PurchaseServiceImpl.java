@@ -100,20 +100,20 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public ModelMap optionOrder(String itemCode, String itemAmount) {
-
-		ModelMap resultMap = null;
+	public HashMap<String,Object> optionOrder(String itemCode, String itemAmount) {
 
 		HashMap<String, String> map = new HashMap<>();
 
 		map.put("itemCode", itemCode);
 		map.put("itemAmount", itemAmount);
 
+		orderMapper.optionOrder(map);
 
-		resultMap = orderMapper.optionOrder(map);
+		HashMap<String,Object> resultMap = new HashMap<>();
+    	resultMap.put("errorCode",map.get("ERROR_CODE"));
+    	resultMap.put("errorMsg", map.get("ERROR_MSG"));
 
 		return resultMap;
-
 	}
 
 

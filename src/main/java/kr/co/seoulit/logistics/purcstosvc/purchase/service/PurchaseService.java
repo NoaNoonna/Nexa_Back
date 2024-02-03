@@ -18,7 +18,7 @@ public interface PurchaseService {
 
 	public HashMap<String,Object> order(ArrayList<String> mrpGaNoArr);
 
-	public ModelMap optionOrder(String itemCode, String itemAmount);
+	public HashMap<String,Object> optionOrder(String itemCode, String itemAmount);
 
 	public ArrayList<OrderInfoTO> getOrderInfoListOnDelivery();
 

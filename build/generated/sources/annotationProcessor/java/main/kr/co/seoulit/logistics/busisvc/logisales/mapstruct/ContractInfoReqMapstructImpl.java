@@ -37,6 +37,7 @@ public class ContractInfoReqMapstructImpl implements ContractInfoReqMapstruct {
         contractInfoDto.setEmpNameInCharge( dto.getEmpNameInCharge() );
         contractInfoDto.setDescription( dto.getDescription() );
         contractInfoDto.setDeliveryCompletionStatus( dto.getDeliveryCompletionStatus() );
+        contractInfoDto.setReleaseCompletionStatus( dto.getReleaseCompletionStatus() );
 
         return contractInfoDto;
     }

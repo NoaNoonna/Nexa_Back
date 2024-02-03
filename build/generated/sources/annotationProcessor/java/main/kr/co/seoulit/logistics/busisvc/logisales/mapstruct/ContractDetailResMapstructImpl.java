@@ -39,6 +39,7 @@ public class ContractDetailResMapstructImpl implements ContractDetailResMapstruc
         contractDetailResDto.setProcessingStatus( entity.getProcessingStatus() );
         contractDetailResDto.setOperationCompletedStatus( entity.getOperationCompletedStatus() );
         contractDetailResDto.setDeliveryCompletionStatus( entity.getDeliveryCompletionStatus() );
+        contractDetailResDto.setReleaseCompletionStatus( entity.getReleaseCompletionStatus() );
         contractDetailResDto.setDescription( entity.getDescription() );
 
         return contractDetailResDto;

@@ -27,7 +27,7 @@ public class OrderController {
 	ModelMap map = null;
 
 
-
+	//원재료검사
 	@RequestMapping(value="/orderinfo")
 	public void checkOrderInfo(@RequestAttribute("reqData") PlatformData reqData,
 									@RequestAttribute("resData")PlatformData resData) throws Exception {
@@ -44,7 +44,7 @@ public class OrderController {
 
 	}
 
-
+	//재고처리/발주필요 목록조회
 	@RequestMapping(value = "/order/list")
 	public void getOrderList(@RequestAttribute("reqData") PlatformData reqData,
 							 @RequestAttribute("resData") PlatformData resData) throws Exception {
@@ -61,10 +61,10 @@ public class OrderController {
 	}
 
 
-	// 모의재고 처리및 취합발주
+	// 모의재고처리 및 취합발주
 	@RequestMapping(value = "/order/dialog")
 	public void openOrderDialog(@RequestAttribute("reqData") PlatformData reqData,
-			@RequestAttribute("resData") PlatformData resData) throws Exception {
+								@RequestAttribute("resData") PlatformData resData) throws Exception {
 
 		String mrpGatheringNoListStr = reqData.getVariable("mrpGatheringNoList").getString();
 		HashMap<String, Object> resultMap =  purchaseService.getOrderDialogInfo(mrpGatheringNoListStr);
@@ -76,10 +76,10 @@ public class OrderController {
 		datasetBeanMapper.beansToDataset(resData, orderDialogList, OrderDialogTempTO.class);
 	}
 
-
+	//발주현황조회
 	@RequestMapping(value="/order/info")
 	public void showOrderInfo(@RequestAttribute("reqData")PlatformData reqData,
-            							@RequestAttribute("resData")PlatformData resData) throws Exception {
+							  @RequestAttribute("resData")PlatformData resData) throws Exception {
 
 		String startDate = reqData.getVariable("startDate").getString();
 		String endDate = reqData.getVariable("endDate").getString();
@@ -90,7 +90,7 @@ public class OrderController {
 
 	}
 
-
+	//오늘 날짜로 입고
 	@RequestMapping(value="/order/delivery")
 	public void searchOrderInfoListOnDelivery(@RequestAttribute("resData")PlatformData resData) throws Exception {
 
@@ -100,7 +100,7 @@ public class OrderController {
 	}
 
 
-	//발주 및 재고처리
+	//현재 전개된 결과 발주 및 재고처리
 	@RequestMapping(value="/order")
 	public void order(@RequestAttribute("reqData")PlatformData reqData) throws Exception {
 
@@ -108,8 +108,18 @@ public class OrderController {
 		ArrayList<String> mrpGaNoArr = new ArrayList<>();
 		mrpGaNoArr.add(mrpGatheringNoList);
 		purchaseService.order(mrpGaNoArr);
-
 	}
 
+	//임의발주
+	@RequestMapping(value = "/optionOrder")
+	public void optionOrder(@RequestAttribute("reqData") PlatformData reqData,
+							 @RequestAttribute("resData") PlatformData resData) throws Exception {
 
+		String itemCode = reqData.getVariable("itemCode").getString();
+		String itemAmount = reqData.getVariable("itemAmount").getString();
+		System.out.println(itemCode);
+
+		purchaseService.optionOrder(itemCode, itemAmount);
+
+	}
 }

@@ -15,32 +15,34 @@ public interface EmpMapper {
 
 	//EmployeeBasic
 	public ArrayList<EmployeeBasicTO> selectEmployeeBasicList(String companyCode);
-	
+
 	public EmployeeBasicTO selectEmployeeBasicTO(HashMap<String, String> map);
-	
+
 	public void insertEmployeeBasic(EmployeeBasicTO TO);
-	
+
 	public void changeUserAccountStatus(HashMap<String, String> map);
-	
+
 	//EmployeeDetail
 	public ArrayList<EmployeeDetailTO> selectEmployeeDetailList(HashMap<String, String> map);
-	
+
 	public ArrayList<EmployeeDetailTO> selectUserIdList(String companyCode);
-	
+
 	public void insertEmployeeDetail(EmployeeDetailTO TO);
-	
+
 	//EmployeeSecret
 	public ArrayList<EmployeeSecretTO> selectEmployeeSecretList(HashMap<String, String> map);
 
 	public EmployeeSecretTO selectUserPassWord(HashMap<String, String> map);
 
 	public void insertEmployeeSecret(EmployeeSecretTO TO);
-	
+
 	public int selectUserPassWordCount(HashMap<String, String> map);
 
 	//EmpSearching
 	public ArrayList<EmpInfoTO> selectAllEmpList(HashMap<String, String> map);
 
 	public ArrayList<EmpInfoTO> getTotalEmpInfo(HashMap<String, String> map);
-	
+
+	public void updateImage(HashMap<String, String> map);
+
 }

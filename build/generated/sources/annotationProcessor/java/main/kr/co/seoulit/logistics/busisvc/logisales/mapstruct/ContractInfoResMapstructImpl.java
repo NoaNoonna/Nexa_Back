@@ -37,6 +37,7 @@ public class ContractInfoResMapstructImpl implements ContractInfoResMapstruct {
         contractInfoResDto.setEmpNameInCharge( entity.getEmpNameInCharge() );
         contractInfoResDto.setDescription( entity.getDescription() );
         contractInfoResDto.setDeliveryCompletionStatus( entity.getDeliveryCompletionStatus() );
+        contractInfoResDto.setReleaseCompletionStatus( entity.getReleaseCompletionStatus() );
 
         return contractInfoResDto;
     }

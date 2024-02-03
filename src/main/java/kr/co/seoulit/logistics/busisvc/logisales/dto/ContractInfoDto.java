@@ -27,8 +27,10 @@ public class ContractInfoDto extends BaseTO {
 	private String personCodeInCharge;
 	private String empNameInCharge;
 	private String description;
+
 	@RemoveColumn
 	private ArrayList<ContractDetailEntity> contractDetailEntityList;
 	private String deliveryCompletionStatus;
+	private String releaseCompletionStatus;
 
 }

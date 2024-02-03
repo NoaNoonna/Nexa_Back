@@ -30,23 +30,23 @@ import kr.co.seoulit.logistics.sys.hr.to.MenuTO;
 
 @Service
 public class HRServiceImpl implements HRService {
-	
+
 	@Autowired
 	private EmpMapper empMapper;
 	@Autowired
 	private CodeMapper codeMapper;
 	@Autowired
 	private AuthorityMapper authorityMapper;
-	@Autowired 
+	@Autowired
 	private EmployeeRepository employeeRepository;
 	@Override
 	public ArrayList<EmpInfoTO> getAllEmpList(String searchCondition, String[] paramArray) {
 
 		ArrayList<EmpInfoTO> empList = null;
-		
+
 		HashMap<String, String> map = new HashMap<>();
 		HashMap<String, String> map1 = new HashMap<>();
-		
+
 		map.put("searchCondition", searchCondition);
 		for(int a=0; a<paramArray.length; a++) {
 			switch (a + "") {
@@ -65,10 +65,10 @@ public class HRServiceImpl implements HRService {
 		empList = empMapper.selectAllEmpList(map);
 
 		for (EmpInfoTO bean : empList) {
-			
+
 			String companyCode = bean.getCompanyCode();
 			String empCode = bean.getEmpCode();
-			
+
 			map1.put("companyCode", companyCode);
 			map1.put("empCode", empCode);
 
@@ -87,12 +87,12 @@ public class HRServiceImpl implements HRService {
 	public EmpInfoTO getEmpInfo(String companyCode, String empCode) {
 
 		EmpInfoTO TO = new EmpInfoTO();
-		
+
 		HashMap<String, String> map = new HashMap<>();
 
 		map.put("companyCode", companyCode);
 		map.put("empCode", empCode);
-		
+
 		ArrayList<EmployeeDetailTO> empDetailTOList = empMapper.selectEmployeeDetailList(map);
 
 		ArrayList<EmployeeSecretTO> empSecretTOList = empMapper.selectEmployeeSecretList(map);
@@ -160,7 +160,7 @@ public class HRServiceImpl implements HRService {
 	public ModelMap batchEmpBasicListProcess(ArrayList<EmployeeBasicTO> empBasicList) {
 
 		ModelMap resultMap = new ModelMap();
-		
+
 		ArrayList<String> insertList = new ArrayList<>();
 		// ArrayList<String> updateList = new ArrayList<>();
 		// ArrayList<String> deleteList = new ArrayList<>();
@@ -219,10 +219,10 @@ public class HRServiceImpl implements HRService {
 				if (bean.getUpdateHistory().equals("계정 정지")) {
 
 					changeEmpAccountUserStatus(bean.getCompanyCode(), bean.getEmpCode(), "N");
-					
+
 					String companyCode = bean.getCompanyCode();
 					String empCode = bean.getEmpCode();
-					
+
 					HashMap<String, String> map = new HashMap<>();
 
 					map.put("companyCode", companyCode);
@@ -336,7 +336,7 @@ public class HRServiceImpl implements HRService {
 		map.put("companyCode", companyCode);
 		map.put("empCode", empCode);
 		map.put("userStatus", userStatus);
-		
+
 		empMapper.changeUserAccountStatus(map);
 
 	}
@@ -349,12 +349,12 @@ public class HRServiceImpl implements HRService {
 
 		TO = checkEmpInfo(companyCode, workplaceCode, userId);	// 데이터 베이스 에서 우리가 로그인 화면에서 입력한 값을 보내줘서 비교한후 있으면 들고와서 그사람의 정보를 bean 에 담는다
 		checkPassWord(companyCode, TO.getEmpCode(), userPassword); // 비밀번호를 확인 해주는 메서드
-			
+
 		String[] userAuthorityGroupList = getUserAuthorityGroupList(TO.getEmpCode()); // 사용자의 권한그룹 리스트를 가져오는 메서드
-		TO.setAuthorityGroupList(userAuthorityGroupList); 
-			 
-		String[] menuList = getUserAuthorityGroupMenu(TO.getEmpCode()); // 권한그룹별 메뉴 리스트를 가져오는 메서드 
-		TO.setAuthorityGroupMenuList(menuList); 
+		TO.setAuthorityGroupList(userAuthorityGroupList);
+
+		String[] menuList = getUserAuthorityGroupMenu(TO.getEmpCode()); // 권한그룹별 메뉴 리스트를 가져오는 메서드
+		TO.setAuthorityGroupMenuList(menuList);
 
 		return TO;
 	}
@@ -363,7 +363,7 @@ public class HRServiceImpl implements HRService {
 	public String[] getAllMenuList() {
 
 		String[] allMenuList = new String[3];
-		
+
 		// 메뉴와 nav메뉴를 담을 변수
 		StringBuffer menuList = new StringBuffer();
 		StringBuffer menuList_b = new StringBuffer();
@@ -372,13 +372,13 @@ public class HRServiceImpl implements HRService {
 		// nav메뉴 정렬을 위한 treemap
 		TreeMap<Integer, MenuTO> treeMap = new TreeMap<>();
 
-		
+
 		ArrayList<MenuTO> allMenuTOList = authorityMapper.selectAllMenuList();
 
 		ArrayList<MenuTO> lv0 = new ArrayList<>();
 		ArrayList<MenuTO> lv1 = new ArrayList<>();
 		ArrayList<MenuTO> lv2 = new ArrayList<>();
-			
+
 		for (MenuTO bean : allMenuTOList) {
 			if (bean.getMenuURL() != null) {
 				String lv = bean.getMenuLevel();
@@ -451,7 +451,7 @@ public class HRServiceImpl implements HRService {
 		menuList.append("</ul>");
 
 		//******************************************************************************************
-			
+
 		int l=0, j=0, k=0;
 		menuList_b.append("<nav class='navbar navbar-expand-sm navbar-light bg-light'>");
 		menuList_b.append("<button class='navbar-toggler' type='button' "
@@ -472,7 +472,7 @@ public class HRServiceImpl implements HRService {
 			for (MenuTO bean1 : lv1) {
 				if(bean1.getChildMenu() == null && bean1.getParentMenuCode().equals(bean0.getMenuCode())) {
 					if(l!=0) menuList_b.append("<div class='dropdown-divider'></div>");
-					menuList_b.append("<a href='"+ bean1.getMenuURL() 
+					menuList_b.append("<a href='"+ bean1.getMenuURL()
 					+"'class='dropdown-item'>" + bean1.getMenuName() + "</a>");
 					l++;
 				} else if (bean1.getChildMenu() != null && bean1.getParentMenuCode().equals(bean0.getMenuCode())) {
@@ -489,7 +489,7 @@ public class HRServiceImpl implements HRService {
 							menuList_b.append("<li style='list-style-type:disc;'>");
 							k++;
 							if(k!=0) {menuList_b.append("<div class='dropdown-divider'></div>");}
-							
+
 							menuList_b.append("<a href='"+ bean2.getMenuURL() +"'"
 									+ "id='" + bean2.getMenuCode()+ "'"
 									+ "'class='dropdown-item'>" + bean2.getMenuName() + "</a>");
@@ -500,15 +500,15 @@ public class HRServiceImpl implements HRService {
 					menuList_b.append("</ul>");
 				}
 			}
-			l=0; 
+			l=0;
 			menuList_b.append("</div>");
 			menuList_b.append("</ul>");
 		}
 		menuList_b.append("</div>");
 		menuList_b.append("</nav>");
-			
+
 		//******************************************************************************************
-			
+
 		// nav메뉴
 		navMenuList.append("<ul class='nav navbar-nav ml-auto'>");
 		for (Integer i : treeMap.keySet()) {
@@ -520,14 +520,14 @@ public class HRServiceImpl implements HRService {
 			navMenuList.append("</li>");
 		}
 		navMenuList.append("</ul>");
-		
+
 		allMenuList[0] = menuList.toString();
 		allMenuList[1] = navMenuList.toString();
 		allMenuList[2] = menuList_b.toString();
 
 		return allMenuList;
 	}
-	
+
 	@Override
 	public ArrayList<AuthorityInfoGroupTO> getAuthorityGroup() {
 
@@ -541,18 +541,18 @@ public class HRServiceImpl implements HRService {
 
 		ArrayList<AuthorityGroupTO> authorityGroupTOList = authorityMapper.selectUserAuthorityGroupList(empCode);
 		return authorityGroupTOList;
-		
+
 	}
 
 	@Override
 	public void insertEmployeeAuthorityGroup(String empCode, String authorityGroupCode) {
 
 	   	  authorityMapper.deleteEmployeeAuthorityGroup(empCode);
-	    	  
+
     	  HashMap<String, String> map = new HashMap<>();
     	  map.put("empCode", empCode);
     	  map.put("authorityGroupCode", authorityGroupCode);
-    	  
+
     	  authorityMapper.insertEmployeeAuthorityGroup(map);
 
 	}
@@ -561,7 +561,7 @@ public class HRServiceImpl implements HRService {
 	public ArrayList<MenuAuthorityTO> getMenuAuthority(String authorityGroupCode) {
 
 		ArrayList<MenuAuthorityTO> menuAuthorityTOList =  null;
-		
+
 		menuAuthorityTOList = authorityMapper.selectMenuAuthorityList(authorityGroupCode);
 
 		return menuAuthorityTOList;
@@ -575,7 +575,7 @@ public class HRServiceImpl implements HRService {
 		for (MenuAuthorityTO bean : menuAuthorityTOList) {
 
 			authorityMapper.insertMenuAuthority(bean);
-				
+
 		}
 
 	}
@@ -586,13 +586,13 @@ public class HRServiceImpl implements HRService {
 		EmpInfoTO bean = null;
 		ArrayList<EmpInfoTO> empInfoTOList = null;
 		HashMap<String,String> map=new HashMap<>();
-		
+
 		map.put("companyCode", companyCode);
 		map.put("workplaceCode", workplaceCode);
 		map.put("userId", userId);
-		
+
 		empInfoTOList = empMapper.getTotalEmpInfo(map);
-		
+
 		System.out.println("LoginInfo : "+empInfoTOList);
 
 		if (empInfoTOList.size() == 1) {
@@ -607,10 +607,10 @@ public class HRServiceImpl implements HRService {
 
 		return bean;
 	}
-	
+
 	private void checkPassWord(String companyCode, String empCode, String userPassword)
 			throws PwMissMatchException, PwNotFoundException {
-		
+
 		HashMap<String, String> map = new HashMap<>();
 
 		map.put("companyCode", companyCode);
@@ -631,25 +631,25 @@ public class HRServiceImpl implements HRService {
 		}
 
 	}
-	
+
 	private String[] getUserAuthorityGroupList(String empCode) {
-		
+
 		String[] userAuthorityGroupList = null;
 
 		ArrayList<AuthorityGroupTO> userAuthorityGroupTOList = authorityMapper.selectUserAuthorityGroupList(empCode);
 
 		Iterator<AuthorityGroupTO> iter=userAuthorityGroupTOList.iterator();
-		while(iter.hasNext()){	
+		while(iter.hasNext()){
 			if(iter.next().getAuthority().equals("0")) {
 				iter.remove();
 			}
 		}
-			
-		// ArrayList 요소를 배열에 담음 
+
+		// ArrayList 요소를 배열에 담음
 		int size = userAuthorityGroupTOList.size();
 		userAuthorityGroupList = new String[size];
-		  for(int i=0; i<size; i++ ) { 
-			  userAuthorityGroupList[i] = userAuthorityGroupTOList.get(i).getUserAuthorityGroupCode(); 
+		  for(int i=0; i<size; i++ ) {
+			  userAuthorityGroupList[i] = userAuthorityGroupTOList.get(i).getUserAuthorityGroupCode();
 		  }
 
 		return userAuthorityGroupList;
@@ -661,11 +661,11 @@ public class HRServiceImpl implements HRService {
 
 		ArrayList<AuthorityGroupMenuTO> authorityGroupMenuTOList = authorityMapper.selectUserMenuAuthorityList(empCode);
 
-		// ArrayList 요소를 배열에 담음 
+		// ArrayList 요소를 배열에 담음
 		int size = authorityGroupMenuTOList.size();
 		authorityGroupMenuList = new String[size];
-		  for(int i=0; i<size; i++ ) { 
-			  authorityGroupMenuList[i] = authorityGroupMenuTOList.get(i).getMenuCode(); 
+		  for(int i=0; i<size; i++ ) {
+			  authorityGroupMenuList[i] = authorityGroupMenuTOList.get(i).getMenuCode();
 		  }
 
 		return authorityGroupMenuList;
@@ -673,9 +673,25 @@ public class HRServiceImpl implements HRService {
 
 	@Override
 	public ArrayList<EmployeeTO> getEmployeeList() {
-		
+
 		return (ArrayList<EmployeeTO>) employeeRepository.findAll();
-		
+
 	}
-	
+
+	@Override
+	public HashMap<String,Object> updateImage(String image, String empCode) {
+
+		HashMap<String, String> map = new HashMap<>();
+
+		map.put("image", image);
+		map.put("empCode", empCode);
+
+		empMapper.updateImage(map);
+
+		HashMap<String,Object> resultMap = new HashMap<>();
+    	resultMap.put("errorCode",map.get("ERROR_CODE"));
+    	resultMap.put("errorMsg", map.get("ERROR_MSG"));
+
+		return resultMap;
+	}
 }

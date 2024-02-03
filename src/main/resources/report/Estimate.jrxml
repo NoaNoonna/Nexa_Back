@@ -141,71 +141,71 @@ WHERE ESTIMATE.ESTIMATE_NO = $P{orderDraftNo}]]>
 				<reportElement x="0" y="140" width="555" height="20" uuid="8357860f-8484-47ac-8808-99fdc6511cdd"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="21" y="0" width="64" height="20" uuid="7c394d2f-edaa-42d9-87a4-8de94a3fcbfe"/>
+				<reportElement x="21" y="0" width="70" height="20" uuid="7c394d2f-edaa-42d9-87a4-8de94a3fcbfe"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[견  적  일  자]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="0" width="64" height="20" uuid="3cc42d0e-d994-4c80-993a-2a674c2965e3"/>
+				<reportElement x="308" y="0" width="70" height="20" uuid="3cc42d0e-d994-4c80-993a-2a674c2965e3"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[사  업  장  명]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="21" y="20" width="64" height="20" uuid="f3384896-b5e2-47ef-b476-6c1ef510ebf5"/>
+				<reportElement x="21" y="20" width="70" height="20" uuid="f3384896-b5e2-47ef-b476-6c1ef510ebf5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[견  적  번  호]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="20" width="64" height="20" uuid="a94b8cca-a4ee-446d-914a-03aa3f957396"/>
+				<reportElement x="308" y="20" width="70" height="20" uuid="a94b8cca-a4ee-446d-914a-03aa3f957396"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[사  업  자  No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="40" width="64" height="20" uuid="84138d7a-dc76-4e5c-aff3-1dc4af561183"/>
+				<reportElement x="308" y="40" width="70" height="20" uuid="84138d7a-dc76-4e5c-aff3-1dc4af561183"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[업             태]]></text>
+				<text><![CDATA[업          태]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="60" width="64" height="20" uuid="0c46ef46-c1f9-4d8d-8a66-9174e67d55b8"/>
+				<reportElement x="308" y="60" width="70" height="20" uuid="0c46ef46-c1f9-4d8d-8a66-9174e67d55b8"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[업             종]]></text>
+				<text><![CDATA[업          종]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="100" width="64" height="20" uuid="7b664391-5b92-4e14-b19f-d406fafc7759"/>
+				<reportElement x="308" y="100" width="70" height="20" uuid="7b664391-5b92-4e14-b19f-d406fafc7759"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[소     재     지]]></text>
+				<text><![CDATA[소   재   지]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="80" width="64" height="20" uuid="9882c61e-378c-4235-87cf-eef6355f546a"/>
+				<reportElement x="308" y="80" width="70" height="20" uuid="9882c61e-378c-4235-87cf-eef6355f546a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[T E L / F A X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="21" y="120" width="64" height="20" uuid="19225b28-d295-4f9d-aab3-8c650036f143"/>
+				<reportElement x="21" y="120" width="70" height="20" uuid="19225b28-d295-4f9d-aab3-8c650036f143"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[견  적  금  액]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="140" width="64" height="20" uuid="fc097321-d5d9-49c7-8a2e-c7d01deff0d8"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement x="100" y="140" width="455" height="20" uuid="fc097321-d5d9-49c7-8a2e-c7d01deff0d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ 견  적  명  세]]></text>
@@ -214,70 +214,70 @@ WHERE ESTIMATE.ESTIMATE_NO = $P{orderDraftNo}]]>
 				<reportElement x="100" y="20" width="186" height="20" uuid="1f8f2fd3-0e8a-4de7-af09-bdd45a8f46ea"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="386" y="0" width="169" height="20" uuid="65811a1e-7bbd-4c87-a515-7bbdb6b1d185"/>
+				<reportElement x="386" y="0" width="165" height="20" uuid="65811a1e-7bbd-4c87-a515-7bbdb6b1d185"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ (주)세계전자 본사]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="386" y="20" width="169" height="20" uuid="3e6d6864-7d3d-488a-94dd-6569d3d7f1bd"/>
+				<reportElement x="386" y="20" width="165" height="20" uuid="3e6d6864-7d3d-488a-94dd-6569d3d7f1bd"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ 120-81-25847]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="386" y="40" width="169" height="20" uuid="7b826168-db6d-44b2-ad03-4756e88e1e13"/>
+				<reportElement x="386" y="40" width="165" height="20" uuid="7b826168-db6d-44b2-ad03-4756e88e1e13"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ 제조, 도·소매]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="386" y="60" width="169" height="20" uuid="21750965-abea-4887-86dc-3900ff767aa6"/>
+				<reportElement x="386" y="60" width="165" height="20" uuid="21750965-abea-4887-86dc-3900ff767aa6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ 전자제품 외]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="386" y="80" width="169" height="20" uuid="b1bd3189-cdbc-4854-bd22-07bd339c1cff"/>
+				<reportElement x="386" y="80" width="165" height="20" uuid="b1bd3189-cdbc-4854-bd22-07bd339c1cff"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[ TEL : 02)567-1094 FAX : 02)]]></text>
+				<text><![CDATA[ TEL: 02)567-1094 FAX: 02)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="386" y="100" width="169" height="20" uuid="9b28d570-c9bd-4469-a511-370ab2a7278f"/>
+				<reportElement x="386" y="100" width="165" height="20" uuid="9b28d570-c9bd-4469-a511-370ab2a7278f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ 서울 강남구 삼성동 512]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="80" width="44" height="20" uuid="74f86114-ab7d-485c-9d3d-ede5e8479793"/>
+				<reportElement x="0" y="80" width="40" height="20" uuid="74f86114-ab7d-485c-9d3d-ede5e8479793"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[T E L  : ]]></text>
+				<text><![CDATA[T E L: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="143" y="80" width="43" height="20" uuid="f2936e1d-339e-478c-8cee-975f597a1ea9"/>
+				<reportElement x="143" y="80" width="40" height="20" uuid="f2936e1d-339e-478c-8cee-975f597a1ea9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[F A X  : ]]></text>
+				<text><![CDATA[F A X: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="20" width="186" height="20" uuid="cb423c48-0580-41c6-868a-682670c0025f"/>
+				<reportElement x="100" y="20" width="184" height="20" uuid="cb423c48-0580-41c6-868a-682670c0025f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ESTIMATE_NO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="186" height="20" uuid="19c95962-4028-4623-8cd9-97e72c692c25"/>
+				<reportElement x="100" y="0" width="184" height="20" uuid="19c95962-4028-4623-8cd9-97e72c692c25"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -291,14 +291,14 @@ WHERE ESTIMATE.ESTIMATE_NO = $P{orderDraftNo}]]>
 				<textFieldExpression><![CDATA[$F{CUSTOMER_NAME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="44" y="80" width="99" height="20" uuid="ca5d0e44-0543-4221-9fb9-a0a806cec888"/>
+				<reportElement x="30" y="80" width="99" height="20" uuid="ca5d0e44-0543-4221-9fb9-a0a806cec888"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CUSTOMER_TEL_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="186" y="80" width="100" height="20" uuid="e6a20742-39c9-43f5-9891-a57f4e7ffd84"/>
+				<reportElement x="150" y="80" width="100" height="20" uuid="e6a20742-39c9-43f5-9891-a57f4e7ffd84"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -564,7 +564,7 @@ WHERE ESTIMATE.ESTIMATE_NO = $P{orderDraftNo}]]>
 				<reportElement x="0" y="0" width="123" height="20" uuid="1d137af9-fe8d-408b-8af5-7f6c9ca3d807"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="123" height="20" uuid="80aa1d82-8c86-4045-bfda-471638589a5f"/>
+				<reportElement x="0" y="0" width="126" height="20" uuid="80aa1d82-8c86-4045-bfda-471638589a5f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
