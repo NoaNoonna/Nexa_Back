@@ -544,11 +544,11 @@ WHERE ESTIMATE.ESTIMATE_NO = $P{orderDraftNo}]]>
 				<text><![CDATA[(인)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="383" y="11" width="125" height="20" uuid="7947b516-75f9-4b2b-8cff-494c2c3e563d"/>
+				<reportElement x="365" y="11" width="140" height="20" uuid="7947b516-75f9-4b2b-8cff-494c2c3e563d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[(주)삼성전자 회장  김형준]]></text>
+				<text><![CDATA[(주)삼성전자 회장 이째째용 ]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

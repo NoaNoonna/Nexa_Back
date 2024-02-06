@@ -89,11 +89,12 @@ public class ContractController {
 							   @RequestAttribute("resData") PlatformData resData) throws Exception {
 
 		ContractReqDto contractReqDto = datasetBeanMapper.datasetToBean(reqData, ContractReqDto.class);
+		System.out.println("contractReqDto1 = " + contractReqDto);
 		contractReqDto.setContractDate(reqData.getVariable("contractDate").getString());
 		contractReqDto.setPersonCodeInCharge(reqData.getVariable("personCodeInCharge").getString());
-
 		List<ContractDetailReqDto> contractDetailReqDtoList = datasetBeanMapper.datasetToBeans(reqData, ContractDetailReqDto.class);
 		contractReqDto.setContractDetailReqDtoList(contractDetailReqDtoList);
+		System.out.println("contractDetailReqDtoList = " + contractDetailReqDtoList);
 
 		HashMap<String, Object> map = logisalesService.addNewContract(contractReqDto);
 

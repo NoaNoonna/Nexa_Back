@@ -15,7 +15,7 @@ public interface DeliveryMapper {
 
     public void deliver(HashMap<String, Object> map);
 
-    public ArrayList<DeliveryInfoResDto> selectDeliveryInfoListByDeliverydate(HashMap<String, String> map);
+//    public ArrayList<DeliveryInfoResDto> selectDeliveryInfoListByDeliverydate(HashMap<String, String> map);
 
     public void insertDeliveryResult(DeliveryInfoEntity TO);
 

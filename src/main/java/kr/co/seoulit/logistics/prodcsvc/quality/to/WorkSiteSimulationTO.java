@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Dataset(name="gds_workSiteSimulation")
 public class WorkSiteSimulationTO {
-	
+
 	private String workOrderNo;
 	private String mrpNo;
 	private String mpsNo;

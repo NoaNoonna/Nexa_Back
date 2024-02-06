@@ -68,6 +68,7 @@ public class DeliveryController {
                                        @RequestAttribute("reqData") PlatformData reqData) throws Exception {
 
         ArrayList<DeliveryInfoResDto> deliveryInfoResDtoList = salesService.getDeliveryInfoList();
+        System.out.println("deliveryInfoResDtoList = " + deliveryInfoResDtoList);
         datasetBeanMapper.beansToDataset(resData, deliveryInfoResDtoList, DeliveryInfoResDto.class);
 
     }

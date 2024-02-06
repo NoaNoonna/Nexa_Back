@@ -57,7 +57,7 @@
 
 	<!--현재 전개된 결과 발주 및 재고처리-->
 	<parameterMap id="orderParameter" type="map" >
-		<parameter property="mrpNoList" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="mrpGatheringNoList" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN" />
 		<parameter property="ERROR_CODE" javaType="java.lang.Integer" jdbcType="DECIMAL" mode="OUT" />
 		<parameter property="ERROR_MSG" javaType="java.lang.String" jdbcType="VARCHAR" mode="OUT" />
 	</parameterMap>

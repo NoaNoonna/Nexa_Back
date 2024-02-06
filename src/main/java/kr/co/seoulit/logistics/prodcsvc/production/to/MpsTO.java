@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "MPS")
-@Dataset(name = "gds_mps")
+@Dataset(name = "gds_mrp")
 public class MpsTO extends BaseTO implements Persistable<String> {
 	@Id
 	private String mpsNo;

@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name="WORK_ORDER_INFO")
 @Dataset(name="gds_workOrderInfo")
 public class WorkOrderInfoTO {
-	
+
 	@Id
 	private String workOrderNo;
 	private String mrpNo;
@@ -31,10 +31,11 @@ public class WorkOrderInfoTO {
 	private String productionStatus;
 	private String completionStatus;
 
-	private String operationCompleted;   //처음에는 null 
+	private String operationCompleted;   //처음에는 null
+
 	@Transient
 	private String checked;
 	@Transient
 	private String actualCompletionAmount;
-	
+
 }

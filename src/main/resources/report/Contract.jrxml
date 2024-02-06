@@ -322,7 +322,7 @@ SELECT * FROM CONTRACT_INFO, CONTRACT_SUM]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[김 한 국]]></text>
+				<text><![CDATA[박 노 아]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="344" y="90" width="211" height="26" uuid="e21ede18-7a60-45c8-b00e-1b735b5a8a2d"/>
@@ -699,11 +699,11 @@ SELECT * FROM CONTRACT_INFO, CONTRACT_SUM]]>
 				<text><![CDATA[원]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="368" y="445" width="129" height="20" uuid="c05b808e-c746-454e-9781-4e0ec9f33977"/>
+				<reportElement x="368" y="445" width="135" height="20" uuid="c05b808e-c746-454e-9781-4e0ec9f33977"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
 				</textElement>
-				<text><![CDATA[     (주) 삼성회장  김형준]]></text>
+				<text><![CDATA[   (주) 삼성회장 이째째용]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="511" y="445" width="20" height="20" uuid="16b3e8cc-98fd-4168-acc0-30f01a883ab2"/>

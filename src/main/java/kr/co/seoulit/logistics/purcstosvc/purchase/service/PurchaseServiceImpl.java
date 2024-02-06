@@ -87,8 +87,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public HashMap<String,Object> order(ArrayList<String> mrpGaNoArr) {
 
 		HashMap<String, String> map = new HashMap<>();
-		String mrpGaNoList = mrpGaNoArr.toString().replace("[", "").replace("]", "");
-		map.put("mrpGaNoList", mrpGaNoList);
+		String mrpGatheringNoList = mrpGaNoArr.toString().replace("[", "").replace("]", "");
+		map.put("mrpGatheringNoList", mrpGatheringNoList);
 
 		orderMapper.order(map);
 

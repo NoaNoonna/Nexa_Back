@@ -3,7 +3,10 @@ package kr.co.seoulit.logistics.purcstosvc.purchase.to;
 import kr.co.seoulit.logistics.sys.annotation.Dataset;
 import lombok.Data;
 
+import javax.persistence.Table;
+
 @Data
+@Table(name="ORDER_REQUIRED_TEMP")
 @Dataset(name="gds_orderTemp")
 public class OrderTempTO {
 

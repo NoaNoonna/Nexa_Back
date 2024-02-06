@@ -31,6 +31,7 @@ public class WorkOrderInfoEntity {
     private String completionStatus;
 
     private String operationCompleted;   //처음에는 null
+
     @Transient
     private String checked;
     @Transient

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Dataset(name="gds_deliveryInfo")
 public class DeliveryInfoResDto extends BaseTO implements Serializable { // redis 적용 => implements Serializable
-	
+
 	private String deliveryNo;
 	private String estimateNo;
 	private String contractNo;
@@ -29,5 +29,4 @@ public class DeliveryInfoResDto extends BaseTO implements Serializable { // redi
 	private String sumPrice;
 	private String deliveryDate;
 	private String deliveryPlaceName;
-
 }

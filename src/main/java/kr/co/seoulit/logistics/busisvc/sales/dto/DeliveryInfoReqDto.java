@@ -14,7 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Dataset(name="gds_deliveryInfo")
 public class DeliveryInfoReqDto extends BaseTO implements Serializable {
-	
+
 	private String deliveryNo;
 	private String estimateNo;
 	private String contractNo;
@@ -29,5 +29,4 @@ public class DeliveryInfoReqDto extends BaseTO implements Serializable {
 	private String sumPrice;
 	private String deliveryDate;
 	private String deliveryPlaceName;
-
 }

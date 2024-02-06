@@ -138,12 +138,11 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    @Cacheable("getDeliveryInfoList") // radis 설정
+//    @Cacheable("getDeliveryInfoList") // radis 설정
     public ArrayList<DeliveryInfoResDto> getDeliveryInfoList() {
-
-        ArrayList<DeliveryInfoResDto> deliveryInfoResDtoList = null;
-        deliveryInfoResDtoList = deliveryMapper.selectDeliveryInfoList();
-
+        System.out.println("============최초실행");
+        ArrayList<DeliveryInfoResDto> deliveryInfoResDtoList = deliveryMapper.selectDeliveryInfoList();
+        System.out.println("deliveryInfoResDtoList = " + deliveryInfoResDtoList);
         return deliveryInfoResDtoList;
     }
 

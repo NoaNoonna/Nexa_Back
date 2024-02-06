@@ -70,7 +70,6 @@
 
 
 		<select id="selectContractList" parameterType="kr.co.seoulit.logistics.busisvc.logisales.dto.ContractInfoReqDto" resultMap="contractInfoResult1">
-
 				WITH
 			CODE_DETAIL_LIST AS (
 			    SELECT

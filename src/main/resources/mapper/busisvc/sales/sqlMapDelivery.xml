@@ -20,21 +20,20 @@
         <result property="deliveryPlaceName" column="DELIVERY_PLACE_NAME"/>
     </resultMap>
 
-    <select id="selectDeliveryInfoList" resultMap="deliveryInfoResult">
-        SELECT *
-        FROM DELIVERY_INFO
-        ORDER BY DELIVERY_DATE DESC
+    <select id="selectDeliveryInfoList" parameterType="kr.co.seoulit.logistics.busisvc.sales.dto.DeliveryInfoResDto" resultType="kr.co.seoulit.logistics.busisvc.sales.dto.DeliveryInfoResDto">
+        SELECT * FROM DELIVERY_INFO
+        ORDER BY DELIVERY_DATE DESC, DELIVERY_NO DESC
     </select>
 
-    <select id="selectDeliveryInfoListByDeliverydate" parameterType="map" resultMap="deliveryInfoResult">
-		<![CDATA[
-        select *
-        from delivery_info d
-        where 1 = 1
-          AND d.delivery_date BETWEEN to_char(to_date(#{startDate}, 'yyyy/mm/dd'), 'yyyy-mm-dd')
-            AND to_char(to_date(#{endDate}, 'yyyy/mm/dd'), 'yyyy-mm-dd')
-        ]]>
-	</select>
+<!--    <select id="selectDeliveryInfoListByDeliverydate" parameterType="map" resultMap="deliveryInfoResult">-->
+<!--		<![CDATA[-->
+<!--        select *-->
+<!--        from delivery_info d-->
+<!--        where 1 = 1-->
+<!--          AND d.delivery_date BETWEEN to_char(to_date(#{startDate}, 'yyyy/mm/dd'), 'yyyy-mm-dd')-->
+<!--            AND to_char(to_date(#{endDate}, 'yyyy/mm/dd'), 'yyyy-mm-dd')-->
+<!--        ]]>-->
+<!--	</select>-->
 
     <insert id="insertDeliveryResult" parameterType="kr.co.seoulit.logistics.busisvc.sales.dto.DeliveryInfoReqDto">
         INSERT INTO DELIVERY_INFO
